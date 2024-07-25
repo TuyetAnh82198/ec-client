@@ -50,11 +50,11 @@ const Form = ({ pageTitle }) => {
     if (gmail) {
       body.Gmail = gmail;
     } else {
+      body.Email = inputs.Email;
       body.Password = inputs.Password;
       if (pageTitle === "Register") {
         body = {
           ...body,
-          Email: inputs.Email,
           Fullname: inputs.Fullname,
           Phone: inputs.Phone,
           role: "client",

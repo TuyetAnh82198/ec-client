@@ -1,7 +1,12 @@
 import Form from "../form/Form";
 import { PAGE_TITLE } from "../../../utils/constants";
+import Background from "../background/Background";
 
 const Login = () => {
-  return <Form pageTitle={PAGE_TITLE.LOGIN} />;
+  return (
+    <Background>
+      <Form pageTitle={PAGE_TITLE.LOGIN} />
+    </Background>
+  );
 };
 export default Login;
