@@ -27,13 +27,6 @@ export const NAVBAR = [
     },
   },
   {
-    SHOP: {
-      PATH: "/shop",
-      TITLE: "Shop",
-      ICON: <WatchIcon fontSize="small" />,
-    },
-  },
-  {
     CART: {
       PATH: "/cart",
       TITLE: "Cart",
