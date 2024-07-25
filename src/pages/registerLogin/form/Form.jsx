@@ -38,13 +38,9 @@ const Form = ({ pageTitle }) => {
   };
 
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    submitForm(null);
-  };
   const submitForm = (gmail) => {
     let fetchUrl;
-    if (pageTitle === "Register") {
+    if (pageTitle === "Register" && gmail) {
       fetchUrl = process.env.REACT_APP_SERVER + API.USER.LOGIN;
     } else {
       fetchUrl =
@@ -52,11 +48,11 @@ const Form = ({ pageTitle }) => {
     }
     let body = {};
     if (gmail) {
-      body["Gmail"] = gmail;
+      body.Gmail = gmail;
     } else {
-      body["Password"] = inputs.Password;
+      body.Password = inputs.Password;
       if (pageTitle === "Register") {
-        return {
+        body = {
           ...body,
           Email: inputs.Email,
           Fullname: inputs.Fullname,
@@ -65,7 +61,6 @@ const Form = ({ pageTitle }) => {
         };
       }
     }
-
     let headers = {
       "Content-Type": "application/json",
     };
@@ -101,6 +96,10 @@ const Form = ({ pageTitle }) => {
       .catch((err) => console.log(err));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitForm("");
+  };
   const handleInputBackground = (field) => {
     return field.trim().length !== 0 ? "#E8F0FE" : "inherit";
   };

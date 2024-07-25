@@ -9,7 +9,7 @@ const handleResponse = (data, pageTitle, navigate) => {
   ) {
     if (data.msg === "Created!") {
       alert(`${pageTitle} Success!`);
-      if (pageTitle === "Register") {
+      if (pageTitle === "Register" && !data.noneFirefox) {
         navigate("/login");
       } else {
         navigate("/");
