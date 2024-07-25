@@ -43,26 +43,33 @@ const Form = ({ pageTitle }) => {
     submitForm(null);
   };
   const submitForm = (gmail) => {
-    const fetchUrl =
-      process.env.REACT_APP_SERVER + API.USER[pageTitle.toUpperCase()];
+    let fetchUrl;
+    if (pageTitle === "Register") {
+      fetchUrl = process.env.REACT_APP_SERVER + API.USER.LOGIN;
+    } else {
+      fetchUrl =
+        process.env.REACT_APP_SERVER + API.USER[pageTitle.toUpperCase()];
+    }
+    let body = {};
+    if (gmail) {
+      body["Gmail"] = gmail;
+    } else {
+      body["Password"] = inputs.Password;
+      if (pageTitle === "Register") {
+        return {
+          ...body,
+          Email: inputs.Email,
+          Fullname: inputs.Fullname,
+          Phone: inputs.Phone,
+          role: "client",
+        };
+      }
+    }
 
-    let body = {
-      Password: inputs.Password,
-    };
-    gmail ? (body["Email"] = inputs.Email) : (body["Gmail"] = gmail);
     let headers = {
       "Content-Type": "application/json",
     };
     const isFirefox = navigator.userAgent.includes("Firefox");
-
-    if (pageTitle === "Register") {
-      body = {
-        ...body,
-        Fullname: inputs.Fullname,
-        Phone: inputs.Phone,
-        role: "client",
-      };
-    }
 
     let fetchObject = {
       method: "POST",
