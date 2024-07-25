@@ -2,8 +2,10 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
-import { StyledForm, StyledContainer } from "./styled";
+import { StyledForm, StyledContainer, StyledFormFooter } from "./styled";
 import { API } from "../../../utils/constants";
 import CirProgress from "../../../components/circularProgress/CircularProgress";
 import handleResponse from "../../../utils/handleResponse";
@@ -16,6 +18,7 @@ const Form = ({ pageTitle }) => {
     Email: "",
     Password: "",
   });
+  const [gmail, setGmail] = useState("");
 
   useEffect(() => {
     if (pageTitle === "Register") {
@@ -35,15 +38,18 @@ const Form = ({ pageTitle }) => {
   };
 
   const navigate = useNavigate();
-  const submitForm = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    submitForm(null);
+  };
+  const submitForm = (gmail) => {
     const fetchUrl =
       process.env.REACT_APP_SERVER + API.USER[pageTitle.toUpperCase()];
 
     let body = {
-      Email: inputs.Email,
       Password: inputs.Password,
     };
+    gmail ? (body["Email"] = inputs.Email) : (body["Gmail"] = gmail);
     let headers = {
       "Content-Type": "application/json",
     };
@@ -92,6 +98,12 @@ const Form = ({ pageTitle }) => {
     return field.trim().length !== 0 ? "#E8F0FE" : "inherit";
   };
 
+  const handleGgLoginSuccess = async (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential);
+    setGmail(decoded.email);
+    submitForm(decoded.email);
+  };
+  const handleGgLoginFail = () => console.log("Login Failed");
   return (
     <>
       {isLoading && <CirProgress />}
@@ -99,7 +111,7 @@ const Form = ({ pageTitle }) => {
         <StyledForm
           sx={{ width: { xs: "100%", sm: "56%", md: "40%", lg: "35%" } }}
         >
-          <form onSubmit={submitForm}>
+          <form onSubmit={handleSubmit}>
             <h3>{pageTitle}</h3>
             {inputFields.map((field, i) => (
               <TextField
@@ -124,9 +136,19 @@ const Form = ({ pageTitle }) => {
                 }}
               />
             ))}
-            <Button type="submit" variant="contained">
-              {pageTitle}
-            </Button>
+            <StyledFormFooter>
+              <GoogleOAuthProvider
+                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              >
+                <GoogleLogin
+                  onSuccess={handleGgLoginSuccess}
+                  onError={handleGgLoginFail}
+                ></GoogleLogin>
+              </GoogleOAuthProvider>
+              <Button type="submit" variant="contained">
+                {pageTitle}
+              </Button>
+            </StyledFormFooter>
           </form>
         </StyledForm>
       </StyledContainer>

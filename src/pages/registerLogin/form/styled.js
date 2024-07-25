@@ -7,3 +7,8 @@ export const StyledContainer = styled(Box)({
   justifyContent: "space-around",
 });
 export const StyledForm = styled(Box)({});
+export const StyledFormFooter = styled(Box)({
+  display: "flex",
+  justifyContent: "space-around",
+  alignItems: "center",
+});
