@@ -9,11 +9,15 @@ import HistoryIcon from "@mui/icons-material/History";
 export const PAGE_TITLE = {
   REGISTER: "Register",
   LOGIN: "Login",
+  FORGOT_PASS: "Forgot Password",
+  RESET_PASS: "Reset Password",
 };
 export const PAGE_PATH = {
+  HOMEPAGE: "/",
   REGISTER: "/register",
   LOGIN: "/login",
   FORGOT_PASS: "/forgot-password",
+  RESET_PASS: "/reset-password/:token",
 };
 
 export const NAVBAR = [
@@ -76,6 +80,8 @@ export const API = {
   USER: {
     REGISTER: `${USER_PATH}/register`,
     LOGIN: `${USER_PATH}/login`,
+    FORGOT_PASS: `${USER_PATH}/forgot-pass`,
+    RESET_PASS: `${USER_PATH}/reset-pass`,
     // CHECK_LOGIN: `${USER_PATH}/check-login`,
     // LOGOUT: `${USER_PATH}/logout`,
   },

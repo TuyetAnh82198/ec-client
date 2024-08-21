@@ -1,4 +1,4 @@
-import { RESPONSE_MESSAGES } from "./constants";
+import { RESPONSE_MESSAGES, PAGE_PATH } from "./constants";
 
 const handleResponse = (data, pageTitle, navigate) => {
   if (!data.msg) {
@@ -10,12 +10,15 @@ const handleResponse = (data, pageTitle, navigate) => {
     if (data.msg === "Created!") {
       alert(`${pageTitle} Success!`);
       if (pageTitle === "Register" && !data.noneFirefox) {
-        navigate("/login");
+        navigate(PAGE_PATH.LOGIN);
       } else {
-        navigate("/");
+        navigate(PAGE_PATH.HOMEPAGE);
         window.location.reload();
       }
     }
+  } else if (data.msg === "Password reset successful.") {
+    alert("Password reset successful.");
+    navigate(PAGE_PATH.LOGIN);
   } else {
     alert(data.msg);
   }
