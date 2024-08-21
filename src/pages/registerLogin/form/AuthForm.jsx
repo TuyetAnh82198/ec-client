@@ -115,7 +115,7 @@ const Form = ({ pageTitle }) => {
       {isLoading && <CirProgress />}
       <StyledContainer>
         <StyledForm
-          sx={{ width: { xs: "100%", sm: "56%", md: "40%", lg: "35%" } }}
+          sx={{ width: { xs: "100%", sm: "56%", md: "40%", lg: "28%" } }}
         >
           <form onSubmit={handleSubmit}>
             <h3>{pageTitle}</h3>

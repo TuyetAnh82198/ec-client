@@ -1,4 +1,4 @@
-import Form from "../form/Form";
+import Form from "../form/AuthForm";
 import { PAGE_TITLE } from "../../../utils/constants";
 import Background from "../background/Background";
 
