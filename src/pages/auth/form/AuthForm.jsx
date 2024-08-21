@@ -16,7 +16,7 @@ import {
   StyledToggleContainer,
   StyledToggle,
 } from "./styled";
-import { API, PAGE_TITLE } from "../../../utils/constants";
+import { API, PAGE_TITLE, PAGE_PATH } from "../../../utils/constants";
 import CirProgress from "../../../components/circularProgress/CircularProgress";
 import handleResponse from "../../../utils/handleResponse";
 import handleNavigate from "../../../utils/handleNavigate";
@@ -126,7 +126,7 @@ const Form = ({ pageTitle }) => {
   const handleGgLoginFail = () => console.log("Login Failed");
 
   const handleTogglePages = () =>
-    navigate(`/${isRegisterPage ? "login" : "register"}`);
+    navigate(isRegisterPage ? PAGE_PATH.LOGIN : PAGE_PATH.REGISTER);
 
   return (
     <>

@@ -10,6 +10,11 @@ export const PAGE_TITLE = {
   REGISTER: "Register",
   LOGIN: "Login",
 };
+export const PAGE_PATH = {
+  REGISTER: "/register",
+  LOGIN: "/login",
+  FORGOT_PASS: "/forgot-password",
+};
 
 export const NAVBAR = [
   {
