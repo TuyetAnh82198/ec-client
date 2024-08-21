@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { handlePath } from "./utils/handlePath";
-import { NAVBAR } from "./utils/constants";
+import { NAVBAR, PAGE_PATH } from "./utils/constants";
 import Layout from "./components/layout/Layout";
 import Register from "./pages/auth/register/Register";
 import Login from "./pages/auth/login/Login";
+import ForgotPass from "./pages/auth/forgotPass/ForgotPass";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   },
   { path: handlePath(NAVBAR, "REGISTER"), element: <Register /> },
   { path: handlePath(NAVBAR, "LOGIN"), element: <Login /> },
+  { path: PAGE_PATH.FORGOT_PASS, element: <ForgotPass /> },
 ]);
 
 function App() {
