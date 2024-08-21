@@ -5,8 +5,14 @@ import { TextField, Button } from "@mui/material";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
-import { StyledForm, StyledContainer, StyledFormFooter } from "./styled";
-import { API } from "../../../utils/constants";
+import {
+  StyledForm,
+  StyledContainer,
+  StyledFormFooter,
+  StyledForgotPass,
+  StyledButton,
+} from "./styled";
+import { API, PAGE_TITLE } from "../../../utils/constants";
 import CirProgress from "../../../components/circularProgress/CircularProgress";
 import handleResponse from "../../../utils/handleResponse";
 import handleNavigate from "../../../utils/handleNavigate";
@@ -21,7 +27,7 @@ const Form = ({ pageTitle }) => {
   const [gmail, setGmail] = useState("");
 
   useEffect(() => {
-    if (pageTitle === "Register") {
+    if (pageTitle === PAGE_TITLE.REGISTER) {
       setInputFields((prev) => {
         return [...prev, "Fullname", "Phone"];
       });
@@ -40,7 +46,7 @@ const Form = ({ pageTitle }) => {
   const navigate = useNavigate();
   const submitForm = (gmail) => {
     let fetchUrl;
-    if (pageTitle === "Register" && gmail) {
+    if (pageTitle === PAGE_TITLE.REGISTER && gmail) {
       fetchUrl = process.env.REACT_APP_SERVER + API.USER.LOGIN;
     } else {
       fetchUrl =
@@ -52,7 +58,7 @@ const Form = ({ pageTitle }) => {
     } else {
       body.Email = inputs.Email;
       body.Password = inputs.Password;
-      if (pageTitle === "Register") {
+      if (pageTitle === PAGE_TITLE.REGISTER) {
         body = {
           ...body,
           Fullname: inputs.Fullname,
@@ -71,7 +77,7 @@ const Form = ({ pageTitle }) => {
       headers: headers,
       body: JSON.stringify(body),
     };
-    if (pageTitle === "Login") {
+    if (pageTitle === PAGE_TITLE.LOGIN) {
       fetchObject = {
         ...fetchObject,
         headers: {
@@ -142,6 +148,9 @@ const Form = ({ pageTitle }) => {
                 }}
               />
             ))}
+            {pageTitle === PAGE_TITLE.LOGIN && (
+              <StyledForgotPass>Forgot password</StyledForgotPass>
+            )}
             <StyledFormFooter>
               <GoogleOAuthProvider
                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -151,9 +160,11 @@ const Form = ({ pageTitle }) => {
                   onError={handleGgLoginFail}
                 ></GoogleLogin>
               </GoogleOAuthProvider>
-              <Button type="submit" variant="contained">
-                {pageTitle}
-              </Button>
+              <StyledButton>
+                <Button fullWidth type="submit" variant="contained">
+                  {pageTitle}
+                </Button>
+              </StyledButton>
             </StyledFormFooter>
           </form>
         </StyledForm>

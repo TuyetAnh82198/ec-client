@@ -9,6 +9,17 @@ export const StyledContainer = styled(Box)({
 export const StyledForm = styled(Box)({});
 export const StyledFormFooter = styled(Box)({
   display: "flex",
-  justifyContent: "space-around",
+  justifyContent: "space-between",
   alignItems: "center",
+});
+export const StyledForgotPass = styled("div")({
+  marginBottom: "1rem",
+  textAlign: "right",
+  color: "#007bff",
+  fontWeight: "450",
+  cursor: "pointer",
+});
+export const StyledButton = styled(Box)({
+  width: "100%",
+  paddingLeft: "1rem",
 });
