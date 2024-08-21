@@ -11,6 +11,10 @@ import {
   StyledFormFooter,
   StyledForgotPass,
   StyledButton,
+  StyledFormHeader,
+  StyledTitle,
+  StyledToggleContainer,
+  StyledToggle,
 } from "./styled";
 import { API, PAGE_TITLE } from "../../../utils/constants";
 import CirProgress from "../../../components/circularProgress/CircularProgress";
@@ -18,6 +22,7 @@ import handleResponse from "../../../utils/handleResponse";
 import handleNavigate from "../../../utils/handleNavigate";
 
 const Form = ({ pageTitle }) => {
+  const [isRegisterPage, setIsRegisterPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputFields, setInputFields] = useState(["Email", "Password"]);
   const [inputs, setInputs] = useState({
@@ -28,12 +33,15 @@ const Form = ({ pageTitle }) => {
 
   useEffect(() => {
     if (pageTitle === PAGE_TITLE.REGISTER) {
+      setIsRegisterPage(true);
       setInputFields((prev) => {
         return [...prev, "Fullname", "Phone"];
       });
       setInputs((prev) => {
         return { ...prev, Fullname: "", Phone: "" };
       });
+    } else {
+      setIsRegisterPage(false);
     }
   }, []);
 
@@ -46,7 +54,7 @@ const Form = ({ pageTitle }) => {
   const navigate = useNavigate();
   const submitForm = (gmail) => {
     let fetchUrl;
-    if (pageTitle === PAGE_TITLE.REGISTER && gmail) {
+    if (isRegisterPage && gmail) {
       fetchUrl = process.env.REACT_APP_SERVER + API.USER.LOGIN;
     } else {
       fetchUrl =
@@ -58,7 +66,7 @@ const Form = ({ pageTitle }) => {
     } else {
       body.Email = inputs.Email;
       body.Password = inputs.Password;
-      if (pageTitle === PAGE_TITLE.REGISTER) {
+      if (isRegisterPage) {
         body = {
           ...body,
           Fullname: inputs.Fullname,
@@ -77,7 +85,7 @@ const Form = ({ pageTitle }) => {
       headers: headers,
       body: JSON.stringify(body),
     };
-    if (pageTitle === PAGE_TITLE.LOGIN) {
+    if (!isRegisterPage) {
       fetchObject = {
         ...fetchObject,
         headers: {
@@ -116,6 +124,10 @@ const Form = ({ pageTitle }) => {
     submitForm(decoded.email);
   };
   const handleGgLoginFail = () => console.log("Login Failed");
+
+  const handleTogglePages = () =>
+    navigate(`/${isRegisterPage ? "login" : "register"}`);
+
   return (
     <>
       {isLoading && <CirProgress />}
@@ -124,7 +136,15 @@ const Form = ({ pageTitle }) => {
           sx={{ width: { xs: "100%", sm: "56%", md: "40%", lg: "28%" } }}
         >
           <form onSubmit={handleSubmit}>
-            <h3>{pageTitle}</h3>
+            <StyledFormHeader>
+              <StyledTitle>{pageTitle}</StyledTitle>
+              <StyledToggleContainer>
+                {isRegisterPage ? "Already" : "Don't"} have an account?{" "}
+                <StyledToggle onClick={handleTogglePages}>
+                  {isRegisterPage ? PAGE_TITLE.LOGIN : PAGE_TITLE.REGISTER}
+                </StyledToggle>
+              </StyledToggleContainer>
+            </StyledFormHeader>
             {inputFields.map((field, i) => (
               <TextField
                 key={i}
@@ -148,7 +168,7 @@ const Form = ({ pageTitle }) => {
                 }}
               />
             ))}
-            {pageTitle === PAGE_TITLE.LOGIN && (
+            {!isRegisterPage && (
               <StyledForgotPass>Forgot password</StyledForgotPass>
             )}
             <StyledFormFooter>
