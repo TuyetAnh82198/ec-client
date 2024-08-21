@@ -3,8 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { handlePath } from "./utils/handlePath";
 import { NAVBAR } from "./utils/constants";
 import Layout from "./components/layout/Layout";
-import Register from "./pages/registerLogin/register/Register";
-import Login from "./pages/registerLogin/login/Login";
+import Register from "./pages/auth/register/Register";
+import Login from "./pages/auth/login/Login";
 
 const router = createBrowserRouter([
   {
