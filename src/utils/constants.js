@@ -82,7 +82,7 @@ export const API = {
     LOGIN: `${USER_PATH}/login`,
     FORGOT_PASS: `${USER_PATH}/forgot-pass`,
     RESET_PASS: `${USER_PATH}/reset-pass`,
-    // CHECK_LOGIN: `${USER_PATH}/check-login`,
+    CHECK_LOGIN: `${USER_PATH}/check-login`,
     // LOGOUT: `${USER_PATH}/logout`,
   },
 };
