@@ -1,10 +1,7 @@
-import HomeIcon from "@mui/icons-material/Home";
-import WatchIcon from "@mui/icons-material/Watch";
-import LogoutIcon from "@mui/icons-material/Logout";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import LoginIcon from "@mui/icons-material/Login";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import HistoryIcon from "@mui/icons-material/History";
+import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export const PAGE_TITLE = {
   REGISTER: "Register",
@@ -16,6 +13,7 @@ export const PAGE_PATH = {
   HOMEPAGE: "/",
   REGISTER: "/register",
   LOGIN: "/login",
+  SHOP: "/shop",
   FORGOT_PASS: "/forgot-password",
   RESET_PASS: "/reset-password/:token",
 };
@@ -25,14 +23,12 @@ export const NAVBAR = [
     HOME: {
       PATH: "/",
       TITLE: "Home",
-      ICON: <HomeIcon fontSize="small" />,
     },
   },
   {
     SHOP: {
       PATH: "/shop",
       TITLE: "Shop",
-      ICON: <WatchIcon fontSize="small" />,
     },
   },
   {
@@ -43,7 +39,10 @@ export const NAVBAR = [
     },
   },
   {
-    USER: {
+    USER: { PATH: "null", ICON: <PersonIcon fontSize="small" /> },
+  },
+  {
+    HISTORY: {
       PATH: "/history",
       TITLE: "History",
       ICON: <HistoryIcon fontSize="small" />,
@@ -51,6 +50,7 @@ export const NAVBAR = [
   },
   {
     LOGOUT: {
+      PATH: "null",
       TITLE: "Logout",
       ICON: <LogoutIcon fontSize="small" />,
     },
@@ -59,14 +59,12 @@ export const NAVBAR = [
     REGISTER: {
       PATH: "/register",
       TITLE: "Register",
-      ICON: <HowToRegIcon fontSize="small" />,
     },
   },
   {
     LOGIN: {
       PATH: "/login",
       TITLE: "Login",
-      ICON: <LoginIcon fontSize="small" />,
     },
   },
 ];
@@ -83,7 +81,7 @@ export const API = {
     FORGOT_PASS: `${USER_PATH}/forgot-pass`,
     RESET_PASS: `${USER_PATH}/reset-pass`,
     CHECK_LOGIN: `${USER_PATH}/check-login`,
-    // LOGOUT: `${USER_PATH}/logout`,
+    LOGOUT: `${USER_PATH}/logout`,
   },
 };
 
@@ -100,4 +98,8 @@ export const RESPONSE_MESSAGES = {
   LOGOUT: {
     SUCCESS: "You are logged out!",
   },
+};
+
+export const CONTENT = {
+  FREE_DELIVERY: "Free doorstep delivery from 10kg.",
 };

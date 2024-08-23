@@ -1,4 +1,10 @@
+import LayoutHeader from "./layout items/LayoutHeader";
+
 const Layout = () => {
-  return;
+  return (
+    <>
+      <LayoutHeader />
+    </>
+  );
 };
 export default Layout;
