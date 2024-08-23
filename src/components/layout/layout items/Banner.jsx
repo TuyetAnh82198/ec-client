@@ -16,7 +16,7 @@ const Banner = () => {
     const handleIndex = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * 3);
       setIndex(randomIndex);
-    }, 2000);
+    }, 2500);
     return () => {
       clearInterval(handleIndex);
     };
