@@ -3,6 +3,11 @@ import HistoryIcon from "@mui/icons-material/History";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 
+export const PAGE_SIZE = {
+  SM: "75%",
+  MD: "60%",
+};
+
 export const PAGE_TITLE = {
   REGISTER: "Register",
   LOGIN: "Login",

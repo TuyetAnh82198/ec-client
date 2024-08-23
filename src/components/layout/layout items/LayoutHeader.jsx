@@ -10,13 +10,14 @@ import {
   StyledContentContainer,
   StyledContent,
   StyledCloseBtn,
-  StyledNavbar,
+  StyledNavbarContainer,
   StyledImgContainer,
   StyledImg,
   StyledItemsContainer,
   StyledItems,
   StyledItem,
   StyledIcon,
+  StyledNavbar,
 } from "../styled.js";
 import {
   CONTENT,
@@ -24,6 +25,7 @@ import {
   API,
   PAGE_PATH,
   RESPONSE_MESSAGES,
+  PAGE_SIZE,
 } from "../../../utils/constants";
 import fetchLogin from "../../../utils/fetchLogin";
 
@@ -137,59 +139,64 @@ const LayoutHeader = () => {
           />
         </StyledCloseBtn>
       </StyledPromotionContainer>
-      <StyledNavbar container>
-        <StyledImgContainer item xs={2}>
-          <StyledImg src={logo} />
-        </StyledImgContainer>
-        <StyledItemsContainer item xs={10}>
-          <StyledItems
-            container
-            spacing={0.5}
-            alignItems="center"
-            minHeight="100%"
-          >
-            {navbarItems.map((item, i) => {
-              let property = handleProperty(item);
-              return (
-                <StyledItem key={i} item xs={3}>
-                  <StyledNavLink
-                    id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={(e) => handleDropdown(e, property)}
-                    to={item[property].PATH}
-                    style={handleActive}
-                  >
-                    {handleIcon(item[property].ICON)}
-                    {property}
-                  </StyledNavLink>
-                  <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                  >
-                    {dropdownItems.map((item, i) => {
-                      let property = handleProperty(item);
-                      return (
-                        <MenuItem
-                          key={i + 10}
-                          onClick={(e) => handleSubMenu(e, property)}
-                        >
-                          {handleIcon(item[property].ICON)}
-                          {property}
-                        </MenuItem>
-                      );
-                    })}
-                  </Menu>
-                </StyledItem>
-              );
-            })}
-          </StyledItems>
-        </StyledItemsContainer>
+      <StyledNavbar>
+        <StyledNavbarContainer
+          container
+          sx={{ width: { sm: PAGE_SIZE.SM, md: PAGE_SIZE.MD } }}
+        >
+          <StyledImgContainer item xs={2}>
+            <StyledImg src={logo} />
+          </StyledImgContainer>
+          <StyledItemsContainer item xs={10}>
+            <StyledItems
+              container
+              spacing={0.5}
+              alignItems="center"
+              minHeight="100%"
+            >
+              {navbarItems.map((item, i) => {
+                let property = handleProperty(item);
+                return (
+                  <StyledItem key={i} item xs={3}>
+                    <StyledNavLink
+                      id="basic-button"
+                      aria-controls={open ? "basic-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={(e) => handleDropdown(e, property)}
+                      to={item[property].PATH}
+                      style={handleActive}
+                    >
+                      {handleIcon(item[property].ICON)}
+                      {property}
+                    </StyledNavLink>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      {dropdownItems.map((item, i) => {
+                        let property = handleProperty(item);
+                        return (
+                          <MenuItem
+                            key={i + 10}
+                            onClick={(e) => handleSubMenu(e, property)}
+                          >
+                            {handleIcon(item[property].ICON)}
+                            {property}
+                          </MenuItem>
+                        );
+                      })}
+                    </Menu>
+                  </StyledItem>
+                );
+              })}
+            </StyledItems>
+          </StyledItemsContainer>
+        </StyledNavbarContainer>
       </StyledNavbar>
     </>
   );
