@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Grid, Slide, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { NavLink } from "react-router-dom";
 
@@ -56,4 +56,17 @@ export const StyledItem = styled(Grid)({
 
 export const StyledIcon = styled("span")({
   margin: "0.25rem 0.1rem 0 0",
+});
+
+export const StyledSlide = styled(Slide)({
+  position: "relative",
+  top: "0",
+  left: "0",
+});
+
+export const StyledSideBtn = styled(Button)({
+  color: "black",
+  position: "absolute",
+  zIndex: "5",
+  cursor: "pointer",
 });

@@ -1,8 +1,9 @@
-import { Slide, Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
+import { StyledSlide, StyledImg, StyledSideBtn } from "../styled";
 import banner1 from "../../../assets/imgs/banner1.jpg";
 import banner2 from "../../../assets/imgs/banner2.jpg";
 import banner3 from "../../../assets/imgs/banner3.jpg";
@@ -36,56 +37,36 @@ const Banner = () => {
     }
   };
 
-  const top = {
-    top: {
-      xs: "30%",
-      sm: "50%",
-      lg: "80%",
-    },
+  const handlePosition = (side) => {
+    const position = {
+      top: {
+        xs: "30%",
+        sm: "50%",
+        lg: "80%",
+      },
+    };
+    position[side] = 0;
+    return position;
   };
+
   return (
     <Box>
       {imgs.map((img, i) => (
-        <Slide
-          style={{
-            display: i === index ? "block" : "none",
-            position: "relative",
-            top: "0",
-            left: "0",
-          }}
+        <StyledSlide
+          sx={{ display: i === index ? "block" : "none" }}
           key={i}
           direction={dir}
           in={index === i}
         >
-          <img src={img} alt="" style={{ width: "100%" }} />
-        </Slide>
+          <StyledImg src={img} alt="" />
+        </StyledSlide>
       ))}
-      <Button
-        sx={top}
-        style={{
-          color: "black",
-          position: "absolute",
-          zIndex: "5",
-          left: 0,
-          cursor: "pointer",
-        }}
-        onClick={handlePrev}
-      >
+      <StyledSideBtn sx={handlePosition("left")} onClick={handlePrev}>
         <KeyboardArrowLeftIcon fontSize="large" />
-      </Button>
-      <Button
-        sx={top}
-        style={{
-          color: "black",
-          position: "absolute",
-          zIndex: "5",
-          right: 0,
-          cursor: "pointer",
-        }}
-        onClick={handleNext}
-      >
+      </StyledSideBtn>
+      <StyledSideBtn sx={handlePosition("right")} onClick={handleNext}>
         <KeyboardArrowRightIcon fontSize="large" />
-      </Button>
+      </StyledSideBtn>
     </Box>
   );
 };
