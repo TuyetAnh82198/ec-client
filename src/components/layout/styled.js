@@ -1,4 +1,4 @@
-import { Grid, Slide, Button } from "@mui/material";
+import { Grid, Slide, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { NavLink } from "react-router-dom";
 
@@ -69,4 +69,27 @@ export const StyledSideBtn = styled(Button)({
   position: "absolute",
   zIndex: "5",
   cursor: "pointer",
+});
+
+export const StyledFooter = styled(Box)({
+  backgroundColor: "#F6F5F1",
+});
+
+export const StyledHr = styled("hr")({
+  borderTop: "1px solid #E9E8E2",
+});
+
+export const StyledContents = styled(Grid)({
+  display: "flex",
+  justifyContent: "space-around",
+});
+
+export const StyledLogoFt = styled("img")({
+  borderRadius: "50%",
+  width: "100%",
+});
+
+export const StyledContentFt = styled(Grid)({
+  display: "flex",
+  justifyContent: "space-around",
 });
