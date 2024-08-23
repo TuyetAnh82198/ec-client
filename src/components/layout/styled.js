@@ -32,12 +32,12 @@ export const StyledCloseBtn = styled(Grid)({
   paddingRight: "0.7rem",
 });
 
-export const StyledNavbarContainer = styled(Grid)({
-  margin: "0.5rem 0",
-});
+export const StyledNavbarContainer = styled(Grid)({});
+
 export const StyledNavbar = styled("div")({
   display: "flex",
   justifyContent: "space-around",
+  margin: "0.5rem 0",
 });
 
 export const StyledImgContainer = styled(Grid)({});
