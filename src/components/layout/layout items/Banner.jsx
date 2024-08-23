@@ -53,7 +53,10 @@ const Banner = () => {
     <Box>
       {imgs.map((img, i) => (
         <StyledSlide
-          sx={{ display: i === index ? "block" : "none" }}
+          sx={{
+            display: i === index ? "block" : "none",
+            height: { xs: "15rem", sm: "15rem", md: "25rem", lg: "50rem" },
+          }}
           key={i}
           direction={dir}
           in={index === i}
