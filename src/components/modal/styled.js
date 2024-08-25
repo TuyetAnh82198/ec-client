@@ -36,4 +36,7 @@ export const StyledBtnContainer = styled(Box)({
 
 export const StyledButton = styled(Button)({
   backgroundColor: COLOR.MAIN_GREEN,
+  "&:hover": {
+    backgroundColor: COLOR.DARK_GREEN,
+  },
 });
