@@ -17,7 +17,7 @@ const Banner = () => {
     const handleIndex = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * 3);
       setIndex(randomIndex);
-    }, 2500);
+    }, 3500);
     return () => {
       clearInterval(handleIndex);
     };
@@ -50,7 +50,7 @@ const Banner = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ overflow: "hidden" }}>
       {imgs.map((img, i) => (
         <StyledSlide
           sx={{
