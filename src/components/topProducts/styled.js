@@ -12,11 +12,11 @@ export const StyledTitleContainer = styled(Box)({
   textAlign: "center",
 });
 
-export const StyledTitle = styled("h2")();
+export const StyledTitle = styled("h2")({});
 
-export const StyledLogo = styled("img")();
+export const StyledLogo = styled("img")({});
 
-export const StyledProducts = styled(Grid)();
+export const StyledProducts = styled(Grid)({});
 
 export const StyledProduct = styled(Grid)({
   textAlign: "center",
