@@ -41,10 +41,11 @@ const Footer = () => {
 
           <StyledContentFt item xs={4}>
             <div>
-              <h3>Policies</h3>
-              <p>Privacy Policy</p>
-              <p>Terms of Use</p>
-              <p>Shipping Policy</p>
+              <h3>Social media</h3>
+              <p>X (Twitter)</p>
+              <p>Instagram</p>
+              <p>Facebook</p>
+              <p>Tiktok</p>
             </div>
           </StyledContentFt>
         </Grid>
