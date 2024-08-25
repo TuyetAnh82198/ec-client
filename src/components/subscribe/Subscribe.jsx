@@ -1,8 +1,9 @@
 import { Box, TextField, InputAdornment, Button } from "@mui/material";
+import { COLOR } from "../../utils/constants";
 
 const Subscribe = () => {
   const bntStyle = {
-    backgroundColor: "#469E02",
+    backgroundColor: COLOR.MAIN_GREEN,
     border: "none",
     padding: "1rem 1.2rem",
     marginRight: "-1rem",

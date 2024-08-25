@@ -3,6 +3,10 @@ import HistoryIcon from "@mui/icons-material/History";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 
+export const COLOR = {
+  MAIN_GREEN: "#469E02",
+};
+
 export const PAGE_SIZE = {
   SM: "75%",
   MD: "60%",
@@ -74,12 +78,14 @@ export const NAVBAR = [
   },
 ];
 
-// const PRODUCTS_PATH = "/products";
+const PRODUCTS_PATH = "/products";
+const PRODUCTS_PATH_GET = "/products/get";
 const USER_PATH = "/user";
+
 export const API = {
-  // PRODUCTS: {
-  //   ADD: `${PRODUCTS_PATH}/add`,
-  // },
+  PRODUCTS: {
+    GET: { TOP6: `${PRODUCTS_PATH_GET}/top6` },
+  },
   USER: {
     REGISTER: `${USER_PATH}/register`,
     LOGIN: `${USER_PATH}/login`,

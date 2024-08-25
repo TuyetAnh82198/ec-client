@@ -25,6 +25,7 @@ import {
   API,
   PAGE_PATH,
   RESPONSE_MESSAGES,
+  COLOR,
 } from "../../../utils/constants";
 import fetchLogin from "../../../utils/fetchLogin";
 import PageSize from "../../pageSize/PageSize";
@@ -72,7 +73,7 @@ const LayoutHeader = () => {
 
   const handleActive = ({ isActive }) => {
     if (isActive) {
-      return { color: "#469E02" };
+      return { color: COLOR.MAIN_GREEN };
     }
   };
 

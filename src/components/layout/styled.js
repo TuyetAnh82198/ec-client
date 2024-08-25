@@ -1,6 +1,7 @@
 import { Grid, Slide, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { NavLink } from "react-router-dom";
+import { COLOR } from "../../utils/constants";
 
 export const StyledNavLink = styled(NavLink)({
   textDecoration: "none",
@@ -9,13 +10,13 @@ export const StyledNavLink = styled(NavLink)({
   display: "flex",
   alignItems: "center",
   "&:hover": {
-    color: "#469E02",
+    color: COLOR.MAIN_GREEN,
   },
 });
 
 export const StyledPromotionContainer = styled(Grid)({
   alignItems: "center",
-  backgroundColor: "#469E02",
+  backgroundColor: COLOR.MAIN_GREEN,
 });
 
 export const StyledContentContainer = styled(Grid)({});
