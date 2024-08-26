@@ -1,8 +1,6 @@
 import { Box, Modal, Grid, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { COLOR } from "../../utils/constants";
-
 export const Container = styled(Modal)({});
 
 export const StyledIcon = styled(Box)({
@@ -32,11 +30,4 @@ export const StyledDesc = styled("p")({
 
 export const StyledBtnContainer = styled(Box)({
   textAlign: "right",
-});
-
-export const StyledButton = styled(Button)({
-  backgroundColor: COLOR.MAIN_GREEN,
-  "&:hover": {
-    backgroundColor: COLOR.DARK_GREEN,
-  },
 });

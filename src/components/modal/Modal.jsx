@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 import {
   Container,
   StyledIcon,
@@ -12,10 +14,16 @@ import {
   StyledPrice,
   StyledDesc,
   StyledBtnContainer,
-  StyledButton,
 } from "./styled";
+import { PAGE_PATH } from "../../utils/constants";
+import GreenButton from "../button/GreenBtn";
 
 const ModalComponent = ({ open, handleClose, pd }) => {
+  const navigate = useNavigate();
+  const handleView = (id) => {
+    navigate(PAGE_PATH.DETAIL.slice(0, -3) + id);
+  };
+
   const muiStyle = {
     position: "absolute",
     top: "50%",
@@ -45,8 +53,8 @@ const ModalComponent = ({ open, handleClose, pd }) => {
             <StyledName>{pd.name}</StyledName>
             <StyledPrice>{`${pd.price.toLocaleString("en-US")}đ`}</StyledPrice>
             <StyledDesc>{pd.desc}</StyledDesc>
-            <StyledBtnContainer>
-              <StyledButton variant="contained">View detail</StyledButton>
+            <StyledBtnContainer onClick={() => handleView(pd._id)}>
+              <GreenButton text="View detail"></GreenButton>
             </StyledBtnContainer>
           </StyledContent>
         </StyledInfor>
