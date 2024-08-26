@@ -10,14 +10,9 @@ import {
   StyledTitleContainer,
   StyledTitle,
   StyledLogo,
-  StyledProducts,
-  StyledProduct,
-  StyledImgContainer,
-  StyledImg,
-  StyledName,
-  StyledPrice,
 } from "./styled";
 import ModalComponent from "../modal/Modal";
+import ProductList from "../productList/ProductList";
 
 const TopProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -57,27 +52,7 @@ const TopProducts = () => {
             </Divider>
           </StyledTitleContainer>
           {isLoading && <CirProgress />}
-          <StyledProducts container spacing={2}>
-            {products.map((pd, i) => (
-              <StyledProduct
-                onClick={() => handleOpen(pd)}
-                key={pd._id}
-                item
-                xs={4}
-              >
-                <StyledImgContainer>
-                  <StyledImg
-                    src={process.env.REACT_APP_SERVER + "/" + pd.imgs[0]}
-                    alt=""
-                  />
-                </StyledImgContainer>
-                <StyledName>{pd.name}</StyledName>
-                <StyledPrice>
-                  {`${pd.price.toLocaleString("en-US")}đ`}
-                </StyledPrice>
-              </StyledProduct>
-            ))}
-          </StyledProducts>
+          <ProductList products={products} handleOpen={handleOpen} />
         </Box>
       </StyledTopPds>
     </>
