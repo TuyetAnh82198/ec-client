@@ -18,7 +18,7 @@ const TopProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState(null);
-  const [endpoint, setEndpoint] = useState(API.PRODUCTS.GET.TOP6);
+  const [endpoint, setEndpoint] = useState(API.PRODUCTS.GET.TOP6 + "/1");
   const [open, setOpen] = useState(false);
 
   const handleOpen = (pd) => {
