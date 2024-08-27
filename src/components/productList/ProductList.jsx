@@ -12,7 +12,7 @@ import {
 const ProductList = ({ products, handleOpen }) => {
   return (
     <StyledProducts container spacing={2}>
-      {products.map((pd, i) => (
+      {products.map((pd) => (
         <StyledProduct
           onClick={() => {
             if (handleOpen) {
