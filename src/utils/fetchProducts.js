@@ -1,4 +1,4 @@
-const fetchLogin = (endpoint, setIsLoading) => {
+const fetchProducts = (endpoint, setIsLoading) => {
   const fetchUrl = process.env.REACT_APP_SERVER + endpoint;
   let fetchObj = {
     method: "GET",
@@ -19,4 +19,4 @@ const fetchLogin = (endpoint, setIsLoading) => {
   });
 };
 
-export default fetchLogin;
+export default fetchProducts;

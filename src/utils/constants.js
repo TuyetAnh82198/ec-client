@@ -26,6 +26,7 @@ export const PAGE_PATH = {
   SHOP: "/shop",
   FORGOT_PASS: "/forgot-password",
   RESET_PASS: "/reset-password/:token",
+  DETAIL: "/detail/:id",
 };
 
 export const NAVBAR = [
@@ -80,12 +81,12 @@ export const NAVBAR = [
 ];
 
 const PRODUCTS_PATH = "/products";
-const PRODUCTS_PATH_GET = "/products/get";
+const PRODUCTS_PATH_GET = `${PRODUCTS_PATH}/get`;
 const USER_PATH = "/user";
 
 export const API = {
   PRODUCTS: {
-    GET: { TOP6: `${PRODUCTS_PATH_GET}/top6` },
+    GET: { TOP6: `${PRODUCTS_PATH_GET}/top6`, DETAIL: `${PRODUCTS_PATH_GET}/` },
   },
   USER: {
     REGISTER: `${USER_PATH}/register`,

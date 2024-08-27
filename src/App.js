@@ -7,12 +7,16 @@ import Login from "./pages/auth/login/Login";
 import ForgotPass from "./pages/auth/forgotPass/ForgotPass";
 import ResetPass from "./pages/auth/resetPass/ResetPass";
 import Homepage from "./pages/homepage/Homepage";
+import Detail from "./pages/detail/Detail";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [{ index: true, element: <Homepage /> }],
+    children: [
+      { index: true, element: <Homepage /> },
+      { path: PAGE_PATH.DETAIL, element: <Detail /> },
+    ],
   },
   { path: PAGE_PATH.REGISTER, element: <Register /> },
   { path: PAGE_PATH.LOGIN, element: <Login /> },
