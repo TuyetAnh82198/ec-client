@@ -1,4 +1,4 @@
-import { Grid, Box, TextField, InputAdornment } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { COLOR } from "../../../utils/constants";
@@ -51,8 +51,9 @@ export const StyledLogo = styled(Box)({
 
 export const StyledInfor = styled(Grid)({});
 
-export const StyledName = styled("h2")({
-  fontWeight: "500",
+export const StyledName = styled(Typography)({
+  fontSize: "1.2rem",
+  fontWeight: "bold",
   marginBottom: "0rem",
 });
 

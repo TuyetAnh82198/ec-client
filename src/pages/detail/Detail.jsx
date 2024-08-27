@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, lazy, Suspense } from "react";
+import { Box } from "@mui/material";
 
 import SubBanner from "../../components/banner/SubBanner";
 import ProductInfor from "./productInfor/ProductInfor";
 import fetchProduct from "../../utils/fetchProducts";
 import { API } from "../../utils/constants";
+import PageSize from "../../components/pageSize/PageSize";
+const Desc = lazy(() => import("./desc/Desc"));
+const RelatedProducts = lazy(() => import("./relatedProducts/RelatedProducts"));
 
 const Detail = () => {
   const params = useParams();
@@ -24,31 +28,24 @@ const Detail = () => {
     fetchPd()
       .then((data) => {
         setProduct(data.products);
+        setProducts(data.relatedProducts);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  //   const fetchPd = useCallback(() => {
-  //     return fetchProduct(endpoint, setIsLoading);
-  //   }, []);
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   fetchPd()
-  //     .then((data) => {
-  //       setProduct(data.products);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
+  const fallback = <div>Loading...</div>;
   return (
     <>
       <SubBanner />
-      <ProductInfor
-        product={product}
-        isLoading={isLoading}
-        products={products}
-      />
+      <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+        <PageSize>
+          <ProductInfor product={product} isLoading={isLoading} />
+          <Suspense fallback={fallback}>
+            <Desc content={product?.desc} />
+            <RelatedProducts products={products} />
+          </Suspense>
+        </PageSize>
+      </Box>
     </>
   );
 };

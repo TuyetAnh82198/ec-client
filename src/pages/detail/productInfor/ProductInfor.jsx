@@ -15,7 +15,6 @@ import {
 } from "react-share";
 
 import CircularProgress from "../../../components/circularProgress/CircularProgress";
-import PageSize from "../../../components/pageSize/PageSize";
 import cup from "../../../assets/imgs/cup.jpg";
 import GreenButton from "../../../components/button/GreenBtn";
 import {
@@ -148,92 +147,90 @@ const ProductInfor = ({ product, isLoading, products }) => {
   };
   return (
     <StyledComponent>
-      <PageSize>
-        <StyledContainer container spacing={3}>
-          {isLoading && CircularProgress}
-          <StyledImgs sx={styleImgs} item xs={7}>
-            <StyledImgList sx={styleImgList} item xs={4} sm={3}>
-              {product &&
-                product.imgs.map((src) => (
-                  <StyledImgContainer
-                    key={src}
-                    onClick={() => handleCompareSrc(src)}
-                    sx={styleImgContainer(src)}
-                  >
-                    <StyledImg
-                      cursor="pointer"
-                      onClick={() => handleImg(src)}
-                      src={handleSrc(src)}
-                      alt=""
-                    />
-                  </StyledImgContainer>
-                ))}
-            </StyledImgList>
-            <StyledImgDisplayed sx={styleImgDisplayed} item xs={0} sm={9}>
-              <Box>
-                <StyledImg src={img} alt="" />
-                {logos}
-              </Box>
-            </StyledImgDisplayed>
-          </StyledImgs>
-          <StyledInfor item xs={5}>
-            <Box sx={styleInfor}>
-              <StyledName>{product?.name}</StyledName>
-              <StyledRank container spacing={1}>
-                <StyledCup sx={styleCup} item xs={3} sm={2} lg={1}>
-                  <StyledIcon src={cup} alt="" />
-                </StyledCup>
-                <StyledContent
-                  sx={{ color: "#007FF1" }}
-                  item
-                  xs={9}
-                  sm={10}
-                  lg={11}
+      <StyledContainer container spacing={3}>
+        {isLoading && CircularProgress}
+        <StyledImgs sx={styleImgs} item xs={7}>
+          <StyledImgList sx={styleImgList} item xs={4} sm={3}>
+            {product &&
+              product.imgs.map((src) => (
+                <StyledImgContainer
+                  key={src}
+                  onClick={() => handleCompareSrc(src)}
+                  sx={styleImgContainer(src)}
                 >
-                  {content.rank}
-                </StyledContent>
-              </StyledRank>
-              <Grid sx={{ color: "gray" }} container>
-                <StyledBrandStock item xs={12} lg={6}>
-                  {content.brand}
-                </StyledBrandStock>
-                <StyledBrandStock item xs={12} lg={6}>
-                  {content.stock}
-                </StyledBrandStock>
-              </Grid>
-              {hr()}
-              <StyledPrice>{`${product?.price.toLocaleString(
-                "en-US"
-              )}đ`}</StyledPrice>
-              {hr()}
-              <StyledDesc>{product?.desc}</StyledDesc>
-              {hr("1rem")}
-              <StyledSubmit container spacing={2}>
-                <StyledQuan item xs={12} lg={7}>
-                  <TextField
-                    placeholder="QUANTITY"
-                    sx={{ width: "100%" }}
-                    type="number"
-                    InputProps={{
-                      inputProps: { min: 1 },
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <ArrowLeftIcon style={{ cursor: "pointer" }} />
-                          <Box>1</Box>
-                          <ArrowRightIcon style={{ cursor: "pointer" }} />
-                        </InputAdornment>
-                      ),
-                    }}
+                  <StyledImg
+                    cursor="pointer"
+                    onClick={() => handleImg(src)}
+                    src={handleSrc(src)}
+                    alt=""
                   />
-                </StyledQuan>
-                <StyledBtn item xs={12} lg={5}>
-                  <GreenButton text="Add to cart" />
-                </StyledBtn>
-              </StyledSubmit>
+                </StyledImgContainer>
+              ))}
+          </StyledImgList>
+          <StyledImgDisplayed sx={styleImgDisplayed} item xs={0} sm={9}>
+            <Box>
+              <StyledImg src={img} alt="" />
+              {logos}
             </Box>
-          </StyledInfor>
-        </StyledContainer>
-      </PageSize>
+          </StyledImgDisplayed>
+        </StyledImgs>
+        <StyledInfor item xs={5}>
+          <Box sx={styleInfor}>
+            <StyledName>{product?.name}</StyledName>
+            <StyledRank container spacing={1}>
+              <StyledCup sx={styleCup} item xs={3} sm={2} lg={1}>
+                <StyledIcon src={cup} alt="" />
+              </StyledCup>
+              <StyledContent
+                sx={{ color: "#007FF1" }}
+                item
+                xs={9}
+                sm={10}
+                lg={11}
+              >
+                {content.rank}
+              </StyledContent>
+            </StyledRank>
+            <Grid sx={{ color: "gray" }} container>
+              <StyledBrandStock item xs={12} lg={6}>
+                {content.brand}
+              </StyledBrandStock>
+              <StyledBrandStock item xs={12} lg={6}>
+                {content.stock}
+              </StyledBrandStock>
+            </Grid>
+            {hr()}
+            <StyledPrice>{`${product?.price.toLocaleString(
+              "en-US"
+            )}đ`}</StyledPrice>
+            {hr()}
+            <StyledDesc>{product?.desc}</StyledDesc>
+            {hr("1rem")}
+            <StyledSubmit container spacing={2}>
+              <StyledQuan item xs={12} lg={7}>
+                <TextField
+                  placeholder="QUANTITY"
+                  sx={{ width: "100%" }}
+                  type="number"
+                  InputProps={{
+                    inputProps: { min: 1 },
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <ArrowLeftIcon style={{ cursor: "pointer" }} />
+                        <Box>1</Box>
+                        <ArrowRightIcon style={{ cursor: "pointer" }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </StyledQuan>
+              <StyledBtn item xs={12} lg={5}>
+                <GreenButton text="Add to cart" />
+              </StyledBtn>
+            </StyledSubmit>
+          </Box>
+        </StyledInfor>
+      </StyledContainer>
     </StyledComponent>
   );
 };
