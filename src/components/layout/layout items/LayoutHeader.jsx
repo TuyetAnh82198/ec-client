@@ -124,12 +124,16 @@ const LayoutHeader = () => {
     } else if (item === "HISTORY") {
     }
   };
+  const stylePromotion = {
+    display: isShow ? "flex" : "none",
+    position: "fixed",
+    top: "0",
+    left: "0",
+    zIndex: "8",
+  };
   return (
     <>
-      <StyledPromotionContainer
-        container
-        sx={{ display: isShow ? "flex" : "none" }}
-      >
+      <StyledPromotionContainer container sx={stylePromotion}>
         <StyledContentContainer item xs={11}>
           <StyledContent>{CONTENT.FREE_DELIVERY}</StyledContent>
         </StyledContentContainer>
@@ -141,7 +145,7 @@ const LayoutHeader = () => {
         </StyledCloseBtn>
       </StyledPromotionContainer>
 
-      <StyledNavbar>
+      <StyledNavbar sx={{ marginTop: isShow ? "3rem" : "0.5rem" }}>
         <PageSize>
           <StyledNavbarContainer container>
             <StyledImgContainer item xs={2}>
