@@ -18,7 +18,7 @@ const Detail = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
-  const [endpoint, setEndpoint] = useState(API.PRODUCTS.GET.DETAIL + id);
+  const [endpoint, setEndpoint] = useState(API.PRODUCTS.GET.DETAIL + id + "/1");
 
   const fetchPd = useCallback(() => {
     return fetchProduct(endpoint, setIsLoading);
