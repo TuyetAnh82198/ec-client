@@ -86,7 +86,10 @@ const USER_PATH = "/user";
 
 export const API = {
   PRODUCTS: {
-    GET: { TOP6: `${PRODUCTS_PATH_GET}/top6`, DETAIL: `${PRODUCTS_PATH_GET}/` },
+    GET: {
+      TOP6: `${PRODUCTS_PATH_GET}/top6`,
+      DETAIL: `${PRODUCTS_PATH_GET}/`,
+    },
   },
   USER: {
     REGISTER: `${USER_PATH}/register`,

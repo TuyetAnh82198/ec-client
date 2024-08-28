@@ -35,7 +35,7 @@ export const StyledCloseBtn = styled(Grid)({
 
 export const StyledNavbarContainer = styled(Grid)({});
 
-export const StyledNavbar = styled("div")({
+export const StyledNavbar = styled(Box)({
   display: "flex",
   justifyContent: "space-around",
   margin: "0.5rem 0",

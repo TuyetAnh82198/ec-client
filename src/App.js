@@ -8,6 +8,7 @@ import ForgotPass from "./pages/auth/forgotPass/ForgotPass";
 import ResetPass from "./pages/auth/resetPass/ResetPass";
 import Homepage from "./pages/homepage/Homepage";
 import Detail from "./pages/detail/Detail";
+import Shop from "./pages/shop/Shop";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Homepage /> },
       { path: PAGE_PATH.DETAIL, element: <Detail /> },
+      { path: PAGE_PATH.SHOP, element: <Shop /> },
     ],
   },
   { path: PAGE_PATH.REGISTER, element: <Register /> },

@@ -22,10 +22,13 @@ export const StyledImg = styled("img")({
   },
 });
 
-export const StyledName = styled("h4")({
-  marginBottom: "0",
+export const StyledName = styled(Box)({
+  height: "4rem",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 });
 
 export const StyledPrice = styled("h4")({
   color: COLOR.MAIN_GREEN,
+  marginTop: "0.5rem",
 });
