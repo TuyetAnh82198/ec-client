@@ -9,6 +9,7 @@ import ResetPass from "./pages/auth/resetPass/ResetPass";
 import Homepage from "./pages/homepage/Homepage";
 import Detail from "./pages/detail/Detail";
 import Shop from "./pages/shop/Shop";
+import Page404 from "./pages/404/Page404";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
   { path: PAGE_PATH.LOGIN, element: <Login /> },
   { path: PAGE_PATH.FORGOT_PASS, element: <ForgotPass /> },
   { path: PAGE_PATH.RESET_PASS, element: <ResetPass /> },
+  { path: "/*", element: <Page404 /> },
 ]);
 
 function App() {
