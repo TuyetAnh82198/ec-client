@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 import {
   StyledProducts,
@@ -8,8 +9,10 @@ import {
   StyledName,
   StyledPrice,
 } from "./styled";
+import { PAGE_PATH } from "../../utils/constants";
 
 const ProductList = ({ products, handleOpen }) => {
+  const navigate = useNavigate();
   return (
     <StyledProducts container spacing={2}>
       {products.map((pd) => (
@@ -17,6 +20,8 @@ const ProductList = ({ products, handleOpen }) => {
           onClick={() => {
             if (handleOpen) {
               handleOpen(pd);
+            } else {
+              navigate(PAGE_PATH.DETAIL.slice(0, -3) + pd._id);
             }
           }}
           key={pd._id}
