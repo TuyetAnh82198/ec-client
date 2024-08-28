@@ -18,6 +18,7 @@ import {
 const ForgotPassForm = ({ pageTitle }) => {
   const [isInputEmail, setIsInputEmail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const [inputFields, setInputFields] = useState([]);
   const [inputs, setInputs] = useState(null);
 
@@ -69,6 +70,7 @@ const ForgotPassForm = ({ pageTitle }) => {
       body: JSON.stringify(body),
     };
     setIsLoading(true);
+    setIsErr(false);
     fetch(fetchUrl, fetchObject)
       .then((response) => response.json())
       .then((data) => {
@@ -79,7 +81,10 @@ const ForgotPassForm = ({ pageTitle }) => {
           handleNavigate.serverErr(navigate);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsErr(true);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -103,7 +108,7 @@ const ForgotPassForm = ({ pageTitle }) => {
   };
   return (
     <>
-      {isLoading && <CirProgress />}
+      {isLoading && !isErr && <CirProgress />}
       <StyledContainer>
         <StyledForm
           sx={{ width: { xs: "100%", sm: "56%", md: "40%", lg: "28%" } }}

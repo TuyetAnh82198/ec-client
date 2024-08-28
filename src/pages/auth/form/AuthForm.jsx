@@ -24,6 +24,7 @@ import handleNavigate from "../../../utils/handleNavigate";
 const Form = ({ pageTitle }) => {
   const [isRegisterPage, setIsRegisterPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const [inputFields, setInputFields] = useState(["Email", "Password"]);
   const [inputs, setInputs] = useState({
     Email: "",
@@ -97,6 +98,7 @@ const Form = ({ pageTitle }) => {
     }
 
     setIsLoading(true);
+    setIsErr(false);
     fetch(fetchUrl, fetchObject)
       .then((response) => response.json())
       .then((data) => {
@@ -107,7 +109,10 @@ const Form = ({ pageTitle }) => {
           handleNavigate.serverErr(navigate);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsErr(true);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -130,7 +135,7 @@ const Form = ({ pageTitle }) => {
 
   return (
     <>
-      {isLoading && <CirProgress />}
+      {isLoading && !isErr && <CirProgress />}
       <StyledContainer>
         <StyledForm
           sx={{ width: { xs: "100%", sm: "56%", md: "40%", lg: "28%" } }}

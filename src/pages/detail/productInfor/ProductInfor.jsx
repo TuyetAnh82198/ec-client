@@ -41,7 +41,7 @@ import {
   StyledBtn,
 } from "./styled";
 
-const ProductInfor = ({ product, isLoading, products }) => {
+const ProductInfor = ({ product, isLoading, isErr, products }) => {
   const [img, setImg] = useState("");
   const [pickedImg, setPickedImg] = useState("");
 
@@ -148,7 +148,7 @@ const ProductInfor = ({ product, isLoading, products }) => {
   return (
     <StyledComponent>
       <StyledContainer container spacing={3}>
-        {isLoading && CircularProgress}
+        {isLoading && !isErr && CircularProgress}
         <StyledImgs sx={styleImgs} item xs={7}>
           <StyledImgList sx={styleImgList} item xs={4} sm={3}>
             {product &&
@@ -238,6 +238,7 @@ const ProductInfor = ({ product, isLoading, products }) => {
 ProductInfor.propTypes = {
   product: PropTypes.object,
   isLoading: PropTypes.bool,
+  isErr: PropTypes.bool,
   products: PropTypes.array,
 };
 

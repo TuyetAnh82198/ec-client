@@ -16,6 +16,7 @@ import ProductList from "../productList/ProductList";
 
 const TopProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState(null);
   const [endpoint, setEndpoint] = useState(API.PRODUCTS.GET.TOP6 + "/1");
@@ -31,11 +32,15 @@ const TopProducts = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    setIsErr(false);
     fetchPds()
       .then((data) => {
         setProducts(data.products);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsErr(true);
+      });
   }, []);
 
   return (
@@ -51,7 +56,7 @@ const TopProducts = () => {
               <StyledLogo src={logo} alt="" />
             </Divider>
           </StyledTitleContainer>
-          {isLoading && <CirProgress />}
+          {isLoading && !isErr && <CirProgress />}
           <ProductList products={products} handleOpen={handleOpen} />
         </Box>
       </StyledTopPds>

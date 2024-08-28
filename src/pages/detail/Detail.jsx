@@ -17,6 +17,7 @@ const Detail = () => {
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const [endpoint, setEndpoint] = useState(API.PRODUCTS.GET.DETAIL + id);
 
   const fetchPd = useCallback(() => {
@@ -25,12 +26,16 @@ const Detail = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    setIsErr(false);
     fetchPd()
       .then((data) => {
         setProduct(data.products);
         setProducts(data.relatedProducts);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsErr(true);
+      });
   }, []);
 
   const fallback = <div>Loading...</div>;
@@ -39,7 +44,7 @@ const Detail = () => {
       <SubBanner />
       <Box sx={{ display: "flex", justifyContent: "space-around" }}>
         <PageSize>
-          <ProductInfor product={product} isLoading={isLoading} />
+          <ProductInfor product={product} isLoading={isLoading} isErr={isErr} />
           <Suspense fallback={fallback}>
             <Desc content={product?.desc} />
             <RelatedProducts products={products} />
