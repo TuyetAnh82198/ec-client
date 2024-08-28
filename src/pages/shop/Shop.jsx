@@ -18,18 +18,20 @@ import {
   StyledSearch,
   StyledSort,
 } from "./styled";
+import Sort from "../../components/sort/Sort";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
   const [endpoint, setEndpoint] = useState(
-    API.PRODUCTS.GET.DETAIL + "all" + "/1"
+    API.PRODUCTS.GET.DETAIL + "all" + "/1/inc"
   );
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [search, setSearch] = useState("");
   const [picked, setPicked] = useState("ALL");
+  const [sort, setSort] = useState("inc");
 
   const categories = ["ALL", "ST", "ST25"];
 
@@ -48,6 +50,8 @@ const Shop = () => {
         "/" +
         page +
         "/" +
+        sort +
+        "/" +
         search
     );
   };
@@ -57,7 +61,6 @@ const Shop = () => {
     setIsErr(false);
     fetchPd()
       .then((data) => {
-        console.log(data);
         setProducts(data.relatedProducts);
         setTotalPage(data.totalPage);
       })
@@ -85,14 +88,31 @@ const Shop = () => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       setEndpoint(
-        API.PRODUCTS.GET.DETAIL + picked.toLowerCase() + "/1/" + e.target.value
+        API.PRODUCTS.GET.DETAIL +
+          picked.toLowerCase() +
+          "/1/" +
+          sort +
+          "/" +
+          e.target.value
       );
     }, 500);
   };
 
   const hanleClear = () => {
     setSearch("");
-    setEndpoint(API.PRODUCTS.GET.DETAIL + picked.toLowerCase() + "/1");
+    setEndpoint(API.PRODUCTS.GET.DETAIL + picked.toLowerCase() + "/1/" + sort);
+  };
+
+  const handleSort = (e) => {
+    setSort(e.target.value);
+    setEndpoint(
+      API.PRODUCTS.GET.DETAIL +
+        picked.toLowerCase() +
+        "/1/" +
+        e.target.value +
+        "/" +
+        search
+    );
   };
 
   return (
@@ -119,15 +139,15 @@ const Shop = () => {
                   />
                 </StyledSearch>
                 <StyledSort item xs={6}>
-                  <select>
-                    <option>Select</option>
-                  </select>
+                  <Sort sort={sort} handleSort={handleSort} />
                 </StyledSort>
               </StyledSearchSort>
 
               {isLoading && !isErr && <CircularProgress />}
               {products.length > 0 ? (
-                <ProductList products={products} />
+                <Box sx={{ marginTop: "0.5rem" }}>
+                  <ProductList products={products} />
+                </Box>
               ) : (
                 <Box>Found no products.</Box>
               )}
