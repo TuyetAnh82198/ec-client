@@ -29,7 +29,9 @@ const ProductList = ({ products, handleOpen }) => {
               alt=""
             />
           </StyledImgContainer>
-          <StyledName>{pd.name}</StyledName>
+          <StyledName>
+            <h4>{pd.name}</h4>
+          </StyledName>
           <StyledPrice>{`${pd.price.toLocaleString("en-US")}đ`}</StyledPrice>
         </StyledProduct>
       ))}
