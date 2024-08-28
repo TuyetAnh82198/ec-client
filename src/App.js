@@ -10,6 +10,7 @@ import Homepage from "./pages/homepage/Homepage";
 import Detail from "./pages/detail/Detail";
 import Shop from "./pages/shop/Shop";
 import Page404 from "./pages/404/Page404";
+import Page500 from "./pages/500/Page500";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
   { path: PAGE_PATH.LOGIN, element: <Login /> },
   { path: PAGE_PATH.FORGOT_PASS, element: <ForgotPass /> },
   { path: PAGE_PATH.RESET_PASS, element: <ResetPass /> },
+  { path: PAGE_PATH.SERVER_ERROR, element: <Page500 /> },
   { path: "/*", element: <Page404 /> },
 ]);
 

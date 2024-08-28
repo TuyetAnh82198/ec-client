@@ -27,6 +27,7 @@ export const PAGE_PATH = {
   FORGOT_PASS: "/forgot-password",
   RESET_PASS: "/reset-password/:token",
   DETAIL: "/detail/:id",
+  SERVER_ERROR: "/server-error",
 };
 
 export const NAVBAR = [
