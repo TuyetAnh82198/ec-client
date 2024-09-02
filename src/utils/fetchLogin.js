@@ -1,4 +1,4 @@
-import { API, RESPONSE_MESSAGES } from "./constants";
+import { API, RESPONSE_MESSAGES, LOCAL_STORAGE } from "./constants";
 
 const fetchLogin = () => {
   const fetchUrl = process.env.REACT_APP_SERVER + API.USER.CHECK_LOGIN;
@@ -6,7 +6,7 @@ const fetchLogin = () => {
     method: "POST",
     credentials: "include",
   };
-  const token = localStorage.getItem("noneFirefox");
+  const token = localStorage.getItem(LOCAL_STORAGE.TOKEN);
   if (token) {
     fetchObj = {
       ...fetchObj,

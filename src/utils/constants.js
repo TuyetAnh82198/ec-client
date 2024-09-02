@@ -3,6 +3,10 @@ import HistoryIcon from "@mui/icons-material/History";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 
+export const LOCAL_STORAGE = {
+  TOKEN: "noneFirefox",
+};
+
 export const COLOR = {
   MAIN_GREEN: "#469E02",
   DARK_GREEN: "#3D8A00",
@@ -84,6 +88,7 @@ export const NAVBAR = [
 const PRODUCTS_PATH = "/products";
 const PRODUCTS_PATH_GET = `${PRODUCTS_PATH}/get`;
 const USER_PATH = "/user";
+const CART_PATH = "/cart";
 
 export const API = {
   PRODUCTS: {
@@ -99,6 +104,9 @@ export const API = {
     RESET_PASS: `${USER_PATH}/reset-pass`,
     CHECK_LOGIN: `${USER_PATH}/check-login`,
     LOGOUT: `${USER_PATH}/logout`,
+  },
+  CART: {
+    ADD: `${CART_PATH}/add`,
   },
 };
 

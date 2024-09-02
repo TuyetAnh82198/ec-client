@@ -1,4 +1,4 @@
-import { RESPONSE_MESSAGES, PAGE_PATH } from "./constants";
+import { RESPONSE_MESSAGES, PAGE_PATH, LOCAL_STORAGE } from "./constants";
 
 const handleResponse = (data, pageTitle, navigate) => {
   if (!data.msg) {
@@ -22,7 +22,7 @@ const handleResponse = (data, pageTitle, navigate) => {
   } else {
     alert(data.msg);
   }
-  const noneFirefox = "noneFirefox";
+  const noneFirefox = LOCAL_STORAGE.TOKEN;
   if (data[noneFirefox] && pageTitle === "Login") {
     localStorage.setItem(noneFirefox, data[noneFirefox]);
   }

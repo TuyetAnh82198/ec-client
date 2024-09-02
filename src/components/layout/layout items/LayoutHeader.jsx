@@ -26,6 +26,7 @@ import {
   PAGE_PATH,
   RESPONSE_MESSAGES,
   COLOR,
+  LOCAL_STORAGE,
 } from "../../../utils/constants";
 import fetchLogin from "../../../utils/fetchLogin";
 import PageSize from "../../pageSize/PageSize";
@@ -113,8 +114,7 @@ const LayoutHeader = () => {
         .then((data) => {
           if (data.msg === RESPONSE_MESSAGES.LOGOUT.SUCCESS) {
             //deployed by a public suffix
-            const noneFirefox = "noneFirefox";
-            localStorage.removeItem(noneFirefox);
+            localStorage.removeItem(LOCAL_STORAGE.TOKEN);
             //
             alert(RESPONSE_MESSAGES.LOGOUT.SUCCESS);
             navigate(PAGE_PATH.LOGIN);
