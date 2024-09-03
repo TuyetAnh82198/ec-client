@@ -91,6 +91,9 @@ const LayoutHeader = () => {
       setAnchorEl(e.currentTarget);
     }
   };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleProperty = (item) => {
     return Object.keys(item)[0];
@@ -178,6 +181,7 @@ const LayoutHeader = () => {
                         id="basic-menu"
                         anchorEl={anchorEl}
                         open={open}
+                        onClose={handleClose}
                         MenuListProps={{
                           "aria-labelledby": "basic-button",
                         }}
