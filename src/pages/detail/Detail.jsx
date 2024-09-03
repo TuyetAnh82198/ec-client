@@ -30,10 +30,11 @@ const Detail = () => {
     fetchPd()
       .then((data) => {
         setProduct(data.products);
-        setProducts(data.relatedProducts);
+        setProducts(
+          data.relatedProducts.filter((p) => p._id !== data.products._id)
+        );
       })
       .catch((err) => {
-        console.log(err);
         setIsErr(true);
       });
   }, []);
