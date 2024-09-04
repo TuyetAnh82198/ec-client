@@ -12,12 +12,21 @@ const handleResponse = (data, pageTitle, navigate) => {
       if (pageTitle === "Register" && !data.noneFirefox) {
         navigate(PAGE_PATH.LOGIN);
       } else {
-        navigate(PAGE_PATH.HOMEPAGE);
-        window.location.reload();
+        const prevPath = localStorage.getItem("prevPath");
+        if (prevPath) {
+          navigate(prevPath);
+          localStorage.removeItem("prevPath");
+        } else {
+          navigate(PAGE_PATH.HOMEPAGE);
+          window.location.reload();
+        }
       }
     }
   } else if (data.msg === "Password reset successful.") {
     alert("Password reset successful.");
+    navigate(PAGE_PATH.LOGIN);
+  } else if (data.msg === RESPONSE_MESSAGES.LOGIN.NOT_LOGIN) {
+    localStorage.setItem("prevPath", window.location.pathname);
     navigate(PAGE_PATH.LOGIN);
   } else {
     alert(data.msg);

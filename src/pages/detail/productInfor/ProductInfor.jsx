@@ -2,7 +2,7 @@ import { Grid, Box, TextField, InputAdornment } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -13,6 +13,7 @@ import {
   XIcon,
   TwitterShareButton,
 } from "react-share";
+import { useNavigate } from "react-router-dom";
 
 import CircularProgress from "../../../components/circularProgress/CircularProgress";
 import cup from "../../../assets/imgs/cup.jpg";
@@ -40,10 +41,15 @@ import {
   StyledQuan,
   StyledBtn,
 } from "./styled";
+import fetchCart from "../../../utils/fetchCart";
+import { API, LOCAL_STORAGE } from "../../../utils/constants";
+import handleResponse from "../../../utils/handleResponse";
 
-const ProductInfor = ({ product, isLoading, isErr, products }) => {
+const ProductInfor = ({ product, isLoading, isErr }) => {
   const [img, setImg] = useState("");
   const [pickedImg, setPickedImg] = useState("");
+  const [quan, setQuan] = useState(1);
+  const [endpoint, setEndpoint] = useState(API.CART.ADD);
 
   const handleSrc = (src) => {
     return process.env.REACT_APP_SERVER + "/" + src;
@@ -145,6 +151,49 @@ const ProductInfor = ({ product, isLoading, isErr, products }) => {
       </div>
     );
   };
+
+  const handleInput = (e) => {
+    const inputValue = e.target.value;
+    if (!inputValue) {
+      setQuan(1);
+    } else {
+      setQuan(inputValue);
+    }
+  };
+  const handleQuanErr = () => {
+    return alert("The quantity is not available!");
+  };
+  const handleQuan = (action) => {
+    if (action === "inc") {
+      if (quan === product.stock) {
+        return handleQuanErr();
+      }
+      setQuan((prev) => (prev += 1));
+    } else {
+      if (quan <= 1) {
+        return handleQuanErr();
+      }
+      setQuan((prev) => (prev -= 1));
+    }
+  };
+
+  const navigate = useNavigate();
+  const handleAdd = (id) => {
+    const headers = { "Content-Type": "application/json" };
+    const body = {
+      productId: id,
+      quan,
+      token: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+    };
+    fetchCart(endpoint, "POST", headers, body)
+      .then((data) => {
+        handleResponse(data, null, navigate);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <StyledComponent>
       <StyledContainer container spacing={3}>
@@ -209,6 +258,8 @@ const ProductInfor = ({ product, isLoading, isErr, products }) => {
             <StyledSubmit container spacing={2}>
               <StyledQuan item xs={12} lg={7}>
                 <TextField
+                  value={quan}
+                  onChange={handleInput}
                   placeholder="QUANTITY"
                   sx={{ width: "100%" }}
                   type="number"
@@ -216,15 +267,26 @@ const ProductInfor = ({ product, isLoading, isErr, products }) => {
                     inputProps: { min: 1 },
                     endAdornment: (
                       <InputAdornment position="end">
-                        <ArrowLeftIcon style={{ cursor: "pointer" }} />
-                        <Box>1</Box>
-                        <ArrowRightIcon style={{ cursor: "pointer" }} />
+                        <ArrowLeftIcon
+                          onClick={() => handleQuan("desc")}
+                          sx={{ cursor: "pointer" }}
+                        />
+                        <Box>{quan}</Box>
+                        <ArrowRightIcon
+                          onClick={() => handleQuan("inc")}
+                          sx={{ cursor: "pointer" }}
+                        />
                       </InputAdornment>
                     ),
                   }}
                 />
               </StyledQuan>
-              <StyledBtn item xs={12} lg={5}>
+              <StyledBtn
+                onClick={() => handleAdd(product._id)}
+                item
+                xs={12}
+                lg={5}
+              >
                 <GreenButton text="Add to cart" />
               </StyledBtn>
             </StyledSubmit>
@@ -239,7 +301,6 @@ ProductInfor.propTypes = {
   product: PropTypes.object,
   isLoading: PropTypes.bool,
   isErr: PropTypes.bool,
-  products: PropTypes.array,
 };
 
 export default ProductInfor;
