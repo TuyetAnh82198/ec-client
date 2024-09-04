@@ -66,7 +66,6 @@ const Shop = () => {
       })
       .catch((err) => {
         setIsErr(true);
-        console.log(err);
       });
   }, [endpoint]);
 
