@@ -1,5 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem, Badge } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +30,12 @@ import {
 } from "../../../utils/constants";
 import fetchLogin from "../../../utils/fetchLogin";
 import PageSize from "../../pageSize/PageSize";
+import { styled } from "@mui/material/styles";
+import { socket } from "../../../socket";
+import {
+  handleSocketConnect,
+  handleSocketAction,
+} from "../../../utils/handleSocket";
 
 const LayoutHeader = () => {
   const [isShow, setIsShow] = useState(true);
@@ -99,8 +105,30 @@ const LayoutHeader = () => {
     return Object.keys(item)[0];
   };
 
-  const handleIcon = (icon) => {
-    return <StyledIcon>{icon}</StyledIcon>;
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: 0,
+      top: 3,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
+  const handleIcon = (icon, property) => {
+    const iconElement = <StyledIcon>{icon}</StyledIcon>;
+    if (property === "CART") {
+      return (
+        <StyledBadge
+          sx={{ marginRight: "0.5rem" }}
+          badgeContent={4}
+          color="error"
+          overlap="circular"
+          invisible={false}
+        >
+          {iconElement}
+        </StyledBadge>
+      );
+    }
+    return iconElement;
   };
 
   const navigate = useNavigate();
@@ -134,6 +162,9 @@ const LayoutHeader = () => {
     left: "0",
     zIndex: "8",
   };
+
+  useEffect(() => handleSocketConnect(socket), []);
+  useEffect(() => handleSocketAction.add(socket), []);
   return (
     <>
       <StyledPromotionContainer container sx={stylePromotion}>
@@ -174,7 +205,7 @@ const LayoutHeader = () => {
                         to={item[property].PATH}
                         style={handleActive}
                       >
-                        {handleIcon(item[property].ICON)}
+                        {handleIcon(item[property].ICON, property)}
                         {property}
                       </StyledNavLink>
                       <Menu
@@ -193,7 +224,7 @@ const LayoutHeader = () => {
                               key={i + 10}
                               onClick={(e) => handleSubMenu(e, property)}
                             >
-                              {handleIcon(item[property].ICON)}
+                              {handleIcon(item[property].ICON, property)}
                               {property}
                             </MenuItem>
                           );

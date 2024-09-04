@@ -3,6 +3,14 @@ import HistoryIcon from "@mui/icons-material/History";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 
+export const SOCKET = {
+  CART: {
+    TITLE: "cart",
+    ADD: "add",
+    NUMBER: "cartNumber",
+  },
+};
+
 export const LOCAL_STORAGE = {
   TOKEN: "noneFirefox",
 };
