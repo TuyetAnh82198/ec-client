@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
 
 import { PAGE_SIZE } from "../../utils/constants";
 
@@ -10,4 +11,7 @@ const PageSize = (props) => {
   );
 };
 
+PageSize.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 export default PageSize;
