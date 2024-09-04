@@ -8,10 +8,10 @@ export const handleSocketConnect = (socket) => {
 };
 
 export const handleSocketAction = {
-  add: (socket) => {
+  add: (socket, setState) => {
     const handleCart = (data) => {
       if (data.action === SOCKET.CART.ADD) {
-        localStorage.setItem(SOCKET.CART.NUMBER, data.cartNumber);
+        setState(data.cartNumber);
       }
     };
     socket.on(SOCKET.CART.TITLE, handleCart);

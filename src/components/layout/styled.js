@@ -55,8 +55,8 @@ export const StyledItem = styled(Grid)({
   textAlign: "center",
 });
 
-export const StyledIcon = styled("span")({
-  margin: "0.25rem 0.1rem 0 0",
+export const StyledIcon = styled(Box)({
+  margin: "0.25rem 0.25rem 0 0",
 });
 
 export const StyledSlide = styled(Slide)({

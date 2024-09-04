@@ -27,6 +27,7 @@ import {
   RESPONSE_MESSAGES,
   COLOR,
   LOCAL_STORAGE,
+  SOCKET,
 } from "../../../utils/constants";
 import fetchLogin from "../../../utils/fetchLogin";
 import PageSize from "../../pageSize/PageSize";
@@ -41,6 +42,7 @@ const LayoutHeader = () => {
   const [isShow, setIsShow] = useState(true);
   const [navbarItems, setNavbarItems] = useState([]);
   const [dropdownItems, setDropdownItems] = useState([]);
+  const [number, setNumber] = useState(0);
 
   const handleFilter = (item, property) => {
     return item.hasOwnProperty(property);
@@ -105,24 +107,25 @@ const LayoutHeader = () => {
     return Object.keys(item)[0];
   };
 
+  //MUI
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
-      right: 0,
+      right: 4,
       top: 3,
       border: `2px solid ${theme.palette.background.paper}`,
       padding: "0 4px",
     },
   }));
+
   const handleIcon = (icon, property) => {
     const iconElement = <StyledIcon>{icon}</StyledIcon>;
     if (property === "CART") {
       return (
         <StyledBadge
-          sx={{ marginRight: "0.5rem" }}
-          badgeContent={4}
+          badgeContent={number}
           color="error"
           overlap="circular"
-          invisible={false}
+          invisible={number === 0 || !number ? true : false}
         >
           {iconElement}
         </StyledBadge>
@@ -164,7 +167,7 @@ const LayoutHeader = () => {
   };
 
   useEffect(() => handleSocketConnect(socket), []);
-  useEffect(() => handleSocketAction.add(socket), []);
+  useEffect(() => handleSocketAction.add(socket, setNumber), []);
   return (
     <>
       <StyledPromotionContainer container sx={stylePromotion}>
