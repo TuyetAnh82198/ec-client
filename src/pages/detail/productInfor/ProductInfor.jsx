@@ -43,6 +43,7 @@ import {
 } from "./styled";
 import { API } from "../../../utils/constants";
 import handleAddToCart from "../../../utils/handleAddToCart";
+import handleResponse from "../../../utils/handleResponse";
 
 const ProductInfor = ({ product, isLoading, isErr }) => {
   const [img, setImg] = useState("");
@@ -267,7 +268,13 @@ const ProductInfor = ({ product, isLoading, isErr }) => {
               </StyledQuan>
               <StyledBtn
                 onClick={() =>
-                  handleAddToCart({ id: product._id, quan, navigate, endpoint })
+                  handleAddToCart({
+                    id: product._id,
+                    quan,
+                    navigate,
+                    endpoint,
+                    handleResponse,
+                  })
                 }
                 item
                 xs={12}
