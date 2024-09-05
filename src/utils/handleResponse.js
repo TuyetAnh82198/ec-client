@@ -2,7 +2,10 @@ import { RESPONSE_MESSAGES, PAGE_PATH, LOCAL_STORAGE } from "./constants";
 
 const handleResponse = (data, pageTitle, navigate) => {
   if (!data.msg) {
-    alert(data.errs);
+    if (data.errs) {
+      alert(data.errs);
+    }
+    return;
   } else if (
     data.msg === RESPONSE_MESSAGES.REGISTER.SUCCESS ||
     data.msg === RESPONSE_MESSAGES.LOGIN.SUCCESS
