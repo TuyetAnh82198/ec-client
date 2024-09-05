@@ -1,6 +1,6 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Menu, MenuItem, Badge } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../../../assets/imgs/logo.png";
@@ -27,7 +27,6 @@ import {
   RESPONSE_MESSAGES,
   COLOR,
   LOCAL_STORAGE,
-  SOCKET,
 } from "../../../utils/constants";
 import fetchLogin from "../../../utils/fetchLogin";
 import PageSize from "../../pageSize/PageSize";
@@ -37,12 +36,14 @@ import {
   handleSocketConnect,
   handleSocketAction,
 } from "../../../utils/handleSocket";
+import fetchCart from "../../../utils/fetchCart";
 
 const LayoutHeader = () => {
   const [isShow, setIsShow] = useState(true);
   const [navbarItems, setNavbarItems] = useState([]);
   const [dropdownItems, setDropdownItems] = useState([]);
   const [number, setNumber] = useState(0);
+  const [endpoint, setEndpoint] = useState(API.CART.GET);
 
   const handleFilter = (item, property) => {
     return item.hasOwnProperty(property);
@@ -77,6 +78,21 @@ const LayoutHeader = () => {
               handleFilter(item, "LOGIN")
           )
         );
+      });
+  }, []);
+
+  const fetchPd = useCallback(() => {
+    const headers = { "Content-Type": "application/json" };
+    const body = { token: localStorage.getItem(LOCAL_STORAGE.TOKEN) };
+    return fetchCart({ endpoint, method: "POST", headers, body });
+  }, [endpoint]);
+  useEffect(() => {
+    fetchPd()
+      .then((data) => {
+        setNumber(data.cart.products.length);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
@@ -167,7 +183,7 @@ const LayoutHeader = () => {
   };
 
   useEffect(() => handleSocketConnect(socket), []);
-  useEffect(() => handleSocketAction.add(socket, setNumber), []);
+  useEffect(() => handleSocketAction.cart.add(socket, setNumber), []);
   return (
     <>
       <StyledPromotionContainer container sx={stylePromotion}>
