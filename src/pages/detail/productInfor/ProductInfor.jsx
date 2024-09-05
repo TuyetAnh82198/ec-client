@@ -2,7 +2,7 @@ import { Grid, Box, TextField, InputAdornment } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PropTypes from "prop-types";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   FacebookIcon,
   FacebookShareButton,
