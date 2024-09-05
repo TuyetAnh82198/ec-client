@@ -41,9 +41,8 @@ import {
   StyledQuan,
   StyledBtn,
 } from "./styled";
-import fetchCart from "../../../utils/fetchCart";
-import { API, LOCAL_STORAGE } from "../../../utils/constants";
-import handleResponse from "../../../utils/handleResponse";
+import { API } from "../../../utils/constants";
+import handleAddToCart from "../../../utils/handleAddToCart";
 
 const ProductInfor = ({ product, isLoading, isErr }) => {
   const [img, setImg] = useState("");
@@ -178,21 +177,6 @@ const ProductInfor = ({ product, isLoading, isErr }) => {
   };
 
   const navigate = useNavigate();
-  const handleAdd = (id) => {
-    const headers = { "Content-Type": "application/json" };
-    const body = {
-      productId: id,
-      quan,
-      token: localStorage.getItem(LOCAL_STORAGE.TOKEN),
-    };
-    fetchCart(endpoint, "POST", headers, body)
-      .then((data) => {
-        handleResponse(data, null, navigate);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <StyledComponent>
@@ -282,7 +266,9 @@ const ProductInfor = ({ product, isLoading, isErr }) => {
                 />
               </StyledQuan>
               <StyledBtn
-                onClick={() => handleAdd(product._id)}
+                onClick={() =>
+                  handleAddToCart({ id: product._id, quan, navigate, endpoint })
+                }
                 item
                 xs={12}
                 lg={5}
