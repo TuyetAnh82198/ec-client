@@ -118,6 +118,7 @@ export const API = {
   CART: {
     ADD: `${CART_PATH}/add`,
     GET: `${CART_PATH}/get`,
+    DELETE: `${CART_PATH}/delete`,
   },
 };
 

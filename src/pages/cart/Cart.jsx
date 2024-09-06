@@ -26,6 +26,8 @@ const Cart = () => {
   const [isErr, setIsErr] = useState(false);
   const [endpoint, setEndpoint] = useState(API.CART.GET);
   const [subEndpoint, setSubEndpoint] = useState(API.CART.ADD);
+  const [deleteEnpoint, setDeleteEndpoint] = useState(API.CART.DELETE);
+  const [ids, setIds] = useState([]);
 
   const fetchPd = useCallback(() => {
     const headers = { "Content-Type": "application/json" };
@@ -72,48 +74,110 @@ const Cart = () => {
   useEffect(() => handleSocketConnect(socket), []);
   useEffect(() => handleSocketAction.cart.get(socket, setCart), []);
 
+  const styledNavigateBtns = {
+    margin: "1rem 0",
+    display: "flex",
+    justifyContent: "space-between",
+  };
+  const styledNavigateBtn = {
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+  };
+
+  const handleDelete = ({ ids, id }) => {
+    const isConfirm = window.confirm("Are you sure?");
+    if (!isConfirm) {
+      return;
+    }
+    const headers = { "Content-Type": "application/json" };
+    const body = {
+      productId: ids ? ids : [id],
+      token: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+    };
+    fetchCart({ endpoint: deleteEnpoint, method: "POST", headers, body })
+      .then((data) => {
+        handleResponse(data, null, navigate);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setIds([]);
+  };
+
+  const handleCheck = (productId) => {
+    const index = ids.findIndex((id) => id === productId);
+    let subArr;
+    if (index !== -1) {
+      subArr = [...ids];
+      subArr.splice(index, 1);
+      setIds(subArr);
+    } else {
+      if (ids.length > 0) {
+        subArr = [...ids, productId];
+        setIds(subArr);
+      } else {
+        subArr = [productId];
+        setIds(subArr);
+      }
+    }
+  };
+
+  const styledTitle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  };
   return (
     <>
       <SubBanner />
       <Box sx={{ display: "flex", justifyContent: "space-around" }}>
         <PageSize>
-          <h3>SHOPPING CART</h3>
           <Grid container spacing={3} sx={{ marginBottom: "1rem" }}>
             <Grid item xs={8}>
-              {!isLoading && !cart && (
+              <Box sx={styledTitle}>
+                <h3>SHOPPING CART</h3>
+                {ids.length > 0 && (
+                  <Button
+                    onClick={() => {
+                      handleDelete({ ids });
+                    }}
+                    sx={{ textTransform: "none", height: "2rem" }}
+                    variant="contained"
+                    color="error"
+                  >
+                    Delete many
+                  </Button>
+                )}
+              </Box>
+              {!isLoading && cart?.products.length === 0 && (
                 <Box>
                   <ShoppingCartIcon />
                   Cart is empty.
                 </Box>
               )}
               {isLoading && !isErr && <CirProgress />}
-              {cart && (
+              {cart?.products.length > 0 && (
                 <PickedProducts
                   products={cart.products}
                   isLoading={isLoading}
                   isErr={isErr}
                   handleQuan={handleQuan}
+                  handleDelete={handleDelete}
+                  handleCheck={handleCheck}
                 />
               )}
-              <Box
-                sx={{ margin: "1rem 0" }}
-                display="flex"
-                justifyContent="space-between"
-              >
+              <Box sx={styledNavigateBtns}>
                 <Box
                   onClick={() => handleNavigate("shop")}
-                  sx={{ cursor: "pointer" }}
-                  display="flex"
-                  alignItems="center"
+                  sx={styledNavigateBtn}
                 >
                   <ArrowBack sx={{ marginRight: "0.5rem" }} />
                   <p>Continue shopping</p>
                 </Box>
                 <Box
                   onClick={() => handleNavigate("checkout")}
-                  sx={{ cursor: "pointer" }}
-                  display="flex"
-                  alignItems="center"
+                  sx={styledNavigateBtn}
                 >
                   <Button sx={{ textTransform: "none" }} variant="outlined">
                     Proceed to checkout{" "}

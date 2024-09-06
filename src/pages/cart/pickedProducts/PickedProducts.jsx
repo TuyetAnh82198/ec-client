@@ -14,24 +14,34 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { StyledCell } from "./styled";
 
-const PickedProducts = ({ products, handleQuan }) => {
-  const titles = ["IMAGE", "PRODUCT", "PRICE", "QUANTITY", "TOTAL", "REMOVE"];
+const PickedProducts = ({
+  products,
+  handleQuan,
+  handleDelete,
+  ids,
+  handleCheck,
+}) => {
+  const titles = [
+    "SELECT",
+    "IMAGE",
+    "PRODUCT",
+    "PRICE",
+    "QUANTITY",
+    "TOTAL",
+    "REMOVE",
+  ];
 
   const styledDeleteBtn = {
     cursor: "pointer",
     color: "gray",
     textAlign: "center",
   };
-
   const cursor = { cursor: "pointer" };
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <StyledCell>
-              <Checkbox disabled />
-            </StyledCell>
             {titles.map((t, i) => (
               <StyledCell key={i}>{t}</StyledCell>
             ))}
@@ -41,7 +51,7 @@ const PickedProducts = ({ products, handleQuan }) => {
           {products.map((p) => (
             <TableRow key={p._id}>
               <StyledCell>
-                <Checkbox />
+                <Checkbox onClick={() => handleCheck(p.productId?._id)} />
               </StyledCell>
               <StyledCell>
                 <img
@@ -87,7 +97,9 @@ const PickedProducts = ({ products, handleQuan }) => {
                 {(p.productId?.price * p.quan).toLocaleString("en-US")}đ
               </StyledCell>
               <StyledCell sx={styledDeleteBtn}>
-                <DeleteIcon />
+                <DeleteIcon
+                  onClick={() => handleDelete({ id: p.productId?._id })}
+                />
               </StyledCell>
             </TableRow>
           ))}
@@ -100,5 +112,8 @@ const PickedProducts = ({ products, handleQuan }) => {
 PickedProducts.propTypes = {
   products: PropTypes.array,
   handleQuan: PropTypes.func,
+  handleDelete: PropTypes.func,
+  ids: PropTypes.array,
+  handleCheck: PropTypes.func,
 };
 export default PickedProducts;
