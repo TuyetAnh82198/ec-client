@@ -8,6 +8,7 @@ export const SOCKET = {
     TITLE: "cart",
     ADD: "add",
     NUMBER: "cartNumber",
+    GET: "get",
   },
 };
 
@@ -40,6 +41,7 @@ export const PAGE_PATH = {
   RESET_PASS: "/reset-password/:token",
   DETAIL: "/detail/:id",
   SERVER_ERROR: "/server-error",
+  CART: "/cart",
 };
 
 export const NAVBAR = [
@@ -115,6 +117,7 @@ export const API = {
   },
   CART: {
     ADD: `${CART_PATH}/add`,
+    GET: `${CART_PATH}/get`,
   },
 };
 

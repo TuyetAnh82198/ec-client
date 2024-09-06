@@ -11,6 +11,7 @@ import Detail from "./pages/detail/Detail";
 import Shop from "./pages/shop/Shop";
 import Page404 from "./pages/404/Page404";
 import Page500 from "./pages/500/Page500";
+import Cart from "./pages/cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { index: true, element: <Homepage /> },
       { path: PAGE_PATH.DETAIL, element: <Detail /> },
       { path: PAGE_PATH.SHOP, element: <Shop /> },
+      { path: PAGE_PATH.CART, element: <Cart /> },
     ],
   },
   { path: PAGE_PATH.REGISTER, element: <Register /> },

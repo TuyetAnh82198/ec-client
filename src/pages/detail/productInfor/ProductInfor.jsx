@@ -44,6 +44,7 @@ import {
 import { API } from "../../../utils/constants";
 import handleAddToCart from "../../../utils/handleAddToCart";
 import handleResponse from "../../../utils/handleResponse";
+import handleQuanErr from "../../../utils/handleQuanErr";
 
 const ProductInfor = ({ product, isLoading, isErr }) => {
   const [img, setImg] = useState("");
@@ -159,9 +160,6 @@ const ProductInfor = ({ product, isLoading, isErr }) => {
     } else {
       setQuan(inputValue);
     }
-  };
-  const handleQuanErr = () => {
-    return alert("The quantity is not available!");
   };
   const handleQuan = (action) => {
     if (action === "inc") {

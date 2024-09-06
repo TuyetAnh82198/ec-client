@@ -7,16 +7,29 @@ export const handleSocketConnect = (socket) => {
   };
 };
 
+const handleOnOff = (socket, handleCart) => {
+  socket.on(SOCKET.CART.TITLE, handleCart);
+  return () => {
+    socket.off(SOCKET.CART.TITLE, handleCart);
+  };
+};
 export const handleSocketAction = {
-  add: (socket, setState) => {
-    const handleCart = (data) => {
-      if (data.action === SOCKET.CART.ADD) {
-        setState(data.cartNumber);
-      }
-    };
-    socket.on(SOCKET.CART.TITLE, handleCart);
-    return () => {
-      socket.off(SOCKET.CART.TITLE, handleCart);
-    };
+  cart: {
+    add: (socket, setState) => {
+      const handleCart = (data) => {
+        if (data.action === SOCKET.CART.ADD) {
+          setState(data.cartNumber);
+        }
+      };
+      handleOnOff(socket, handleCart);
+    },
+    get: (socket, setState) => {
+      const handleCart = (data) => {
+        if (data.action === SOCKET.CART.GET) {
+          setState(data.cart);
+        }
+      };
+      handleOnOff(socket, handleCart);
+    },
   },
 };
