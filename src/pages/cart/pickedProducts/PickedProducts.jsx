@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { StyledCell } from "./styled";
+import handlePrice from "../../../utils/handlePrice";
 
 const PickedProducts = ({
   products,
@@ -63,9 +64,7 @@ const PickedProducts = ({
               <StyledCell theme={{ textAlign: "left" }}>
                 {p.productId?.name}
               </StyledCell>
-              <StyledCell>
-                {p.productId?.price.toLocaleString("en-US")}đ
-              </StyledCell>
+              <StyledCell>{handlePrice(p.productId?.price)}đ</StyledCell>
               <StyledCell>
                 <Box sx={{ display: "flex" }}>
                   <ArrowLeftIcon
@@ -94,7 +93,7 @@ const PickedProducts = ({
                 </Box>
               </StyledCell>
               <StyledCell>
-                {(p.productId?.price * p.quan).toLocaleString("en-US")}đ
+                {handlePrice(p.productId?.price * p.quan)}đ
               </StyledCell>
               <StyledCell sx={styledDeleteBtn}>
                 <DeleteIcon

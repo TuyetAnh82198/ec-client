@@ -17,6 +17,7 @@ import {
 } from "./styled";
 import { PAGE_PATH } from "../../utils/constants";
 import GreenButton from "../button/GreenBtn";
+import handlePrice from "../../utils/handlePrice";
 
 const ModalComponent = ({ open, handleClose, pd }) => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const ModalComponent = ({ open, handleClose, pd }) => {
           </StyledImgContainer>
           <StyledContent item xs={7}>
             <StyledName>{pd.name}</StyledName>
-            <StyledPrice>{`${pd.price.toLocaleString("en-US")}đ`}</StyledPrice>
+            <StyledPrice>{`${handlePrice(pd.price)}đ`}</StyledPrice>
             <StyledDesc>{pd.desc}</StyledDesc>
             <StyledBtnContainer onClick={() => handleView(pd._id)}>
               <GreenButton text="View detail"></GreenButton>

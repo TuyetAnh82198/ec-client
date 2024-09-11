@@ -10,6 +10,7 @@ import {
   StyledPrice,
 } from "./styled";
 import { PAGE_PATH } from "../../utils/constants";
+import handlePrice from "../../utils/handlePrice";
 
 const ProductList = ({ products, handleOpen }) => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const ProductList = ({ products, handleOpen }) => {
           <StyledName>
             <h4>{pd.name}</h4>
           </StyledName>
-          <StyledPrice>{`${pd.price.toLocaleString("en-US")}đ`}</StyledPrice>
+          <StyledPrice>{`${handlePrice(pd.price)}đ`}</StyledPrice>
         </StyledProduct>
       ))}
     </StyledProducts>
