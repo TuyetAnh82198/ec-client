@@ -10,8 +10,8 @@ const Sort = ({ sort, handleSort }) => {
       value={sort}
       select
     >
-      <MenuItem value="inc">Lowest</MenuItem>
       <MenuItem value="desc">Highest</MenuItem>
+      <MenuItem value="inc">Lowest</MenuItem>
     </TextField>
   );
 };

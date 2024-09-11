@@ -25,13 +25,13 @@ const Shop = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
   const [endpoint, setEndpoint] = useState(
-    API.PRODUCTS.GET.DETAIL + "all" + "/1/inc"
+    API.PRODUCTS.GET.DETAIL + "all" + "/1/desc"
   );
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [search, setSearch] = useState("");
   const [picked, setPicked] = useState("ALL");
-  const [sort, setSort] = useState("inc");
+  const [sort, setSort] = useState("desc");
 
   const categories = ["ALL", "ST", "ST25"];
 
