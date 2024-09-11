@@ -138,5 +138,5 @@ export const RESPONSE_MESSAGES = {
 };
 
 export const CONTENT = {
-  FREE_DELIVERY: "Free doorstep delivery from 10kg.",
+  FREE_DELIVERY: "Free doorstep delivery from 499.000đ.",
 };
