@@ -14,11 +14,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import handleAddToCart from "../../utils/handleAddToCart";
 import { socket } from "../../socket";
 import {
-  handleSocketConnect,
+  handleSocketConnect2,
   handleSocketAction,
 } from "../../utils/handleSocket";
 import handleQuanErr from "../../utils/handleQuanErr";
 import CirProgress from "../../components/circularProgress/CircularProgress";
+import CartTotal from "./total/CartTotal";
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
@@ -71,7 +72,7 @@ const Cart = () => {
     }
   };
 
-  useEffect(() => handleSocketConnect(socket), []);
+  useEffect(() => handleSocketConnect2(socket), []);
   useEffect(() => handleSocketAction.cart.get(socket, setCart), []);
 
   const styledNavigateBtns = {
@@ -91,8 +92,17 @@ const Cart = () => {
       return;
     }
     const headers = { "Content-Type": "application/json" };
+    const productId = ids ? ids : [id];
+    const products = cart.products.filter((pd) =>
+      productId.includes(pd.productId._id)
+    );
+    const amount = products.reduce(
+      (acc, p) => acc + p.productId.price * p.quan,
+      0
+    );
     const body = {
-      productId: ids ? ids : [id],
+      productId,
+      amount,
       token: localStorage.getItem(LOCAL_STORAGE.TOKEN),
     };
     fetchCart({ endpoint: deleteEnpoint, method: "POST", headers, body })
@@ -131,25 +141,35 @@ const Cart = () => {
   return (
     <>
       <SubBanner />
-      <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          padding: "0.5rem",
+        }}
+      >
         <PageSize>
+          <Grid container>
+            <Grid item sx={styledTitle} xs={12} md={8}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "490" }}>
+                SHOPPING CART
+              </h3>
+              {ids.length > 0 && (
+                <Button
+                  onClick={() => {
+                    handleDelete({ ids });
+                  }}
+                  sx={{ textTransform: "none", height: "2rem" }}
+                  variant="contained"
+                  color="error"
+                >
+                  Delete many
+                </Button>
+              )}
+            </Grid>
+          </Grid>
           <Grid container spacing={3} sx={{ marginBottom: "1rem" }}>
-            <Grid item xs={8}>
-              <Box sx={styledTitle}>
-                <h3>SHOPPING CART</h3>
-                {ids.length > 0 && (
-                  <Button
-                    onClick={() => {
-                      handleDelete({ ids });
-                    }}
-                    sx={{ textTransform: "none", height: "2rem" }}
-                    variant="contained"
-                    color="error"
-                  >
-                    Delete many
-                  </Button>
-                )}
-              </Box>
+            <Grid item xs={12} md={8}>
               {!isLoading && cart?.products.length === 0 && (
                 <Box>
                   <ShoppingCartIcon />
@@ -172,21 +192,23 @@ const Cart = () => {
                   onClick={() => handleNavigate("shop")}
                   sx={styledNavigateBtn}
                 >
-                  <ArrowBack sx={{ marginRight: "0.5rem" }} />
-                  <p>Continue shopping</p>
+                  <ArrowBack />
+                  <span> Continue shopping</span>
                 </Box>
                 <Box
                   onClick={() => handleNavigate("checkout")}
                   sx={styledNavigateBtn}
                 >
                   <Button sx={{ textTransform: "none" }} variant="outlined">
-                    Proceed to checkout{" "}
-                    <ArrowForwardIcon sx={{ marginLeft: "0.5rem" }} />
+                    <span>Proceed to checkout </span>
+                    <ArrowForwardIcon />
                   </Button>
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={4}></Grid>
+            <Grid item xs={12} md={4}>
+              <CartTotal cart={cart} />
+            </Grid>
           </Grid>
         </PageSize>
       </Box>

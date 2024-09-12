@@ -6,6 +6,9 @@ export const handleSocketConnect = (socket) => {
     socket.disconnect();
   };
 };
+export const handleSocketConnect2 = (socket) => {
+  socket.connect();
+};
 
 const handleOnOff = (socket, handleCart) => {
   socket.on(SOCKET.CART.TITLE, handleCart);
@@ -13,6 +16,7 @@ const handleOnOff = (socket, handleCart) => {
     socket.off(SOCKET.CART.TITLE, handleCart);
   };
 };
+
 export const handleSocketAction = {
   cart: {
     add: (socket, setState) => {

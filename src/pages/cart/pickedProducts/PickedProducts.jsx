@@ -19,7 +19,6 @@ const PickedProducts = ({
   products,
   handleQuan,
   handleDelete,
-  ids,
   handleCheck,
 }) => {
   const titles = [
@@ -39,71 +38,73 @@ const PickedProducts = ({
   };
   const cursor = { cursor: "pointer" };
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            {titles.map((t, i) => (
-              <StyledCell key={i}>{t}</StyledCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {products.map((p) => (
-            <TableRow key={p._id}>
-              <StyledCell>
-                <Checkbox onClick={() => handleCheck(p.productId?._id)} />
-              </StyledCell>
-              <StyledCell>
-                <img
-                  style={{ width: "100%" }}
-                  src={`${process.env.REACT_APP_SERVER}/${p.productId?.imgs[0]}`}
-                  alt=""
-                />
-              </StyledCell>
-              <StyledCell theme={{ textAlign: "left" }}>
-                {p.productId?.name}
-              </StyledCell>
-              <StyledCell>{handlePrice(p.productId?.price)}đ</StyledCell>
-              <StyledCell>
-                <Box sx={{ display: "flex" }}>
-                  <ArrowLeftIcon
-                    onClick={() =>
-                      handleQuan({
-                        action: "desc",
-                        id: p.productId?._id,
-                        quan: p.quan,
-                        stock: p.productId?.stock,
-                      })
-                    }
-                    sx={cursor}
-                  />
-                  {p.quan}
-                  <ArrowRightIcon
-                    onClick={() =>
-                      handleQuan({
-                        action: "inc",
-                        id: p.productId?._id,
-                        quan: p.quan,
-                        stock: p.productId?.stock,
-                      })
-                    }
-                    sx={cursor}
-                  />
-                </Box>
-              </StyledCell>
-              <StyledCell>
-                {handlePrice(p.productId?.price * p.quan)}đ
-              </StyledCell>
-              <StyledCell sx={styledDeleteBtn}>
-                <DeleteIcon
-                  onClick={() => handleDelete({ id: p.productId?._id })}
-                />
-              </StyledCell>
+    <TableContainer sx={{ overflow: "auto" }} component={Paper}>
+      <Box sx={{ width: "100%", display: "table", tableLayout: "fixed" }}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {titles.map((t, i) => (
+                <StyledCell key={i}>{t}</StyledCell>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {products.map((p) => (
+              <TableRow key={p._id}>
+                <StyledCell>
+                  <Checkbox onClick={() => handleCheck(p.productId?._id)} />
+                </StyledCell>
+                <StyledCell>
+                  <img
+                    style={{ width: "100%" }}
+                    src={`${process.env.REACT_APP_SERVER}/${p.productId?.imgs[0]}`}
+                    alt=""
+                  />
+                </StyledCell>
+                <StyledCell theme={{ textAlign: "left" }}>
+                  {p.productId?.name}
+                </StyledCell>
+                <StyledCell>{handlePrice(p.productId?.price)}đ</StyledCell>
+                <StyledCell>
+                  <Box sx={{ display: "flex" }}>
+                    <ArrowLeftIcon
+                      onClick={() =>
+                        handleQuan({
+                          action: "desc",
+                          id: p.productId?._id,
+                          quan: p.quan,
+                          stock: p.productId?.stock,
+                        })
+                      }
+                      sx={cursor}
+                    />
+                    {p.quan}
+                    <ArrowRightIcon
+                      onClick={() =>
+                        handleQuan({
+                          action: "inc",
+                          id: p.productId?._id,
+                          quan: p.quan,
+                          stock: p.productId?.stock,
+                        })
+                      }
+                      sx={cursor}
+                    />
+                  </Box>
+                </StyledCell>
+                <StyledCell>
+                  {handlePrice(p.productId?.price * p.quan)}đ
+                </StyledCell>
+                <StyledCell sx={styledDeleteBtn}>
+                  <DeleteIcon
+                    onClick={() => handleDelete({ id: p.productId?._id })}
+                  />
+                </StyledCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
     </TableContainer>
   );
 };
@@ -112,7 +113,6 @@ PickedProducts.propTypes = {
   products: PropTypes.array,
   handleQuan: PropTypes.func,
   handleDelete: PropTypes.func,
-  ids: PropTypes.array,
   handleCheck: PropTypes.func,
 };
 export default PickedProducts;
