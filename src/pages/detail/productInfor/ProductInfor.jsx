@@ -45,6 +45,7 @@ import { API } from "../../../utils/constants";
 import handleAddToCart from "../../../utils/handleAddToCart";
 import handleResponse from "../../../utils/handleResponse";
 import handleQuanErr from "../../../utils/handleQuanErr";
+import handleHrStyle from "../../../utils/hanldeHrStyle";
 
 const ProductInfor = ({ product, isLoading, isErr }) => {
   const [img, setImg] = useState("");
@@ -145,7 +146,7 @@ const ProductInfor = ({ product, isLoading, isErr }) => {
       <div>
         <hr
           style={{
-            borderTop: "1px solid #E9E8E2",
+            borderTop: handleHrStyle(),
             marginBottom: size || "0",
           }}
         />
