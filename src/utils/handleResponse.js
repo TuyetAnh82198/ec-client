@@ -37,6 +37,11 @@ const handleResponse = (data, pageTitle, navigate) => {
   const noneFirefox = LOCAL_STORAGE.TOKEN;
   if (data[noneFirefox] && pageTitle === "Login") {
     localStorage.setItem(noneFirefox, data[noneFirefox]);
+
+    const now = new Date();
+    const oneDay = 1000 * 60 * 60 * 24;
+    const expiry = now.getTime() + oneDay;
+    localStorage.setItem("expiry", expiry);
   }
 };
 
