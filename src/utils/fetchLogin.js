@@ -6,7 +6,17 @@ const fetchLogin = () => {
     method: "POST",
     credentials: "include",
   };
-  const token = localStorage.getItem(LOCAL_STORAGE.TOKEN);
+
+  let token;
+  const expiry = localStorage.getItem("expiry");
+  const now = new Date();
+  if (now.getTime() > expiry) {
+    localStorage.removeItem("expiry");
+    token = "";
+  } else {
+    token = localStorage.getItem(LOCAL_STORAGE.TOKEN);
+  }
+
   if (token) {
     fetchObj = {
       ...fetchObj,
