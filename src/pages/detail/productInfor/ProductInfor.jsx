@@ -182,7 +182,7 @@ const ProductInfor = ({ product, isLoading, isErr }) => {
     <StyledComponent>
       <StyledContainer container spacing={3}>
         {isLoading && !isErr && CircularProgress}
-        <StyledImgs sx={styleImgs} item xs={7}>
+        <StyledImgs sx={styleImgs} item xs={5} md={7}>
           <StyledImgList sx={styleImgList} item xs={4} sm={3}>
             {product &&
               product.imgs.map((src) => (
@@ -207,7 +207,7 @@ const ProductInfor = ({ product, isLoading, isErr }) => {
             </Box>
           </StyledImgDisplayed>
         </StyledImgs>
-        <StyledInfor item xs={5}>
+        <StyledInfor item xs={7} md={5}>
           <Box sx={styleInfor}>
             <StyledName>{product?.name}</StyledName>
             <StyledRank container spacing={1}>
