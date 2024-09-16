@@ -42,6 +42,7 @@ export const PAGE_PATH = {
   DETAIL: "/detail/:id",
   SERVER_ERROR: "/server-error",
   CART: "/cart",
+  CHECKOUT: "/checkout",
 };
 
 export const NAVBAR = [

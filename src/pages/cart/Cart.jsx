@@ -29,6 +29,7 @@ const Cart = () => {
   const [subEndpoint, setSubEndpoint] = useState(API.CART.ADD);
   const [deleteEnpoint, setDeleteEndpoint] = useState(API.CART.DELETE);
   const [ids, setIds] = useState([]);
+  const [isCheckout, setIsCheckout] = useState(true);
 
   const fetchPd = useCallback(() => {
     const headers = { "Content-Type": "application/json" };
@@ -49,6 +50,14 @@ const Cart = () => {
         setIsErr(true);
       });
   }, []);
+
+  useEffect(() => {
+    if (cart?.products.length > 0) {
+      setIsCheckout(false);
+      return;
+    }
+    setIsCheckout(true);
+  }, [cart]);
 
   const handleNavigate = (dir) => {
     if (dir === "checkout") {
@@ -199,7 +208,11 @@ const Cart = () => {
                   onClick={() => handleNavigate("checkout")}
                   sx={styledNavigateBtn}
                 >
-                  <Button sx={{ textTransform: "none" }} variant="outlined">
+                  <Button
+                    disabled={isCheckout}
+                    sx={{ textTransform: "none" }}
+                    variant="outlined"
+                  >
                     <span>Proceed to checkout </span>
                     <ArrowForwardIcon />
                   </Button>
