@@ -39,7 +39,7 @@ const Total = ({ cart, title, children }) => {
           <StyledContent item>
             {handleTotalAmount(cart) < 499000 && handleTotalAmount(cart) !== 0
               ? handlePrice(cart?.totalAmount + CONTENT.SHIP)
-              : handlePrice(cart?.totalAmount - CONTENT.SHIP)}
+              : handlePrice(cart?.totalAmount)}
             đ
           </StyledContent>
         )}
@@ -51,7 +51,7 @@ const Total = ({ cart, title, children }) => {
 Total.propTypes = {
   cart: PropTypes.object,
   title: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default Total;
