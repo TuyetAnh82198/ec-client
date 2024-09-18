@@ -13,6 +13,8 @@ import Page404 from "./pages/404/Page404";
 import Page500 from "./pages/500/Page500";
 import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout/Checkout";
+import PaymentSuccess from "./pages/payment/announcement/PaymentSuccess";
+import PaymentFail from "./pages/payment/announcement/PaymentFail";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,8 @@ const router = createBrowserRouter([
       { path: PAGE_PATH.SHOP, element: <Shop /> },
       { path: PAGE_PATH.CART, element: <Cart /> },
       { path: PAGE_PATH.CHECKOUT, element: <Checkout /> },
+      { path: PAGE_PATH.PAYMENT.SUCCESS, element: <PaymentSuccess /> },
+      { path: PAGE_PATH.PAYMENT.FAIL, element: <PaymentFail /> },
     ],
   },
   { path: PAGE_PATH.REGISTER, element: <Register /> },

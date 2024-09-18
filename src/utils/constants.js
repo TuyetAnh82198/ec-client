@@ -43,6 +43,10 @@ export const PAGE_PATH = {
   SERVER_ERROR: "/server-error",
   CART: "/cart",
   CHECKOUT: "/checkout",
+  PAYMENT: {
+    SUCCESS: "/payment-success",
+    FAIL: "/payment-fail",
+  },
 };
 
 export const NAVBAR = [
@@ -141,4 +145,11 @@ export const RESPONSE_MESSAGES = {
 export const CONTENT = {
   FREE_DELIVERY: "Free doorstep delivery from 499.000đ.",
   SHIP: 20000,
+  PAYMENT: {
+    SUCCESS: {
+      TITLE: "Payment Successful.",
+      CONTENT: "Thank you for your order!",
+    },
+    FAIL: { TITLE: "Oops! Your payment has been cancelled." },
+  },
 };
