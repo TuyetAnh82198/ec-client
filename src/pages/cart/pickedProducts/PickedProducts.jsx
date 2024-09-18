@@ -22,7 +22,7 @@ const PickedProducts = ({
   handleCheck,
 }) => {
   const titles = [
-    "SELECT",
+    "REMOVE MANY",
     "IMAGE",
     "PRODUCT",
     "PRICE",
