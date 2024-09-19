@@ -20,9 +20,13 @@ const Detail = () => {
   const [isErr, setIsErr] = useState(false);
   const [endpoint, setEndpoint] = useState(API.PRODUCTS.GET.DETAIL + id + "/1");
 
+  useEffect(() => {
+    setEndpoint(API.PRODUCTS.GET.DETAIL + id + "/1");
+  }, [id]);
+
   const fetchPd = useCallback(() => {
     return fetchProduct(endpoint, setIsLoading);
-  }, []);
+  }, [endpoint]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,7 +41,7 @@ const Detail = () => {
       .catch((err) => {
         setIsErr(true);
       });
-  }, []);
+  }, [endpoint]);
 
   const fallback = <div>Loading...</div>;
   return (
