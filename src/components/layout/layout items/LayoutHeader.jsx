@@ -184,6 +184,7 @@ const LayoutHeader = () => {
 
   useEffect(() => handleSocketConnect(socket), []);
   useEffect(() => handleSocketAction.cart.add(socket, setNumber), []);
+  useEffect(() => handleSocketAction.cart.checkout(socket, setNumber), []);
   return (
     <>
       <StyledPromotionContainer container sx={stylePromotion}>

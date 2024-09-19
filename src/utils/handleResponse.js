@@ -31,6 +31,9 @@ const handleResponse = (data, pageTitle, navigate) => {
   } else if (data.msg === RESPONSE_MESSAGES.LOGIN.NOT_LOGIN) {
     localStorage.setItem("prevPath", window.location.pathname);
     navigate(PAGE_PATH.LOGIN);
+  } else if (data.msg === RESPONSE_MESSAGES.CART.CHECKOUT.UNPAID.WITHOUT_CARD) {
+    alert(data.msg);
+    navigate(PAGE_PATH.HISTORY);
   } else {
     alert(data.msg);
   }

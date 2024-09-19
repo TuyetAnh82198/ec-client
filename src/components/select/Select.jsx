@@ -1,7 +1,7 @@
 import { MenuItem, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 
-const Select = ({ label, values, handleChange }) => {
+const Select = ({ label, value, values, handleChange }) => {
   return (
     <TextField
       fullWidth
@@ -9,7 +9,7 @@ const Select = ({ label, values, handleChange }) => {
       onChange={handleChange}
       id="select"
       label={label}
-      value={values[0]}
+      value={value}
       select
     >
       {values.map((v, i) => (
@@ -23,6 +23,7 @@ const Select = ({ label, values, handleChange }) => {
 
 Select.propTypes = {
   label: PropTypes.string,
+  value: PropTypes.string,
   values: PropTypes.array,
   handleChange: PropTypes.func,
 };

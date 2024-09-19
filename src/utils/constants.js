@@ -9,6 +9,7 @@ export const SOCKET = {
     ADD: "add",
     NUMBER: "cartNumber",
     GET: "get",
+    CHECKOUT: "checkout",
   },
 };
 
@@ -47,6 +48,7 @@ export const PAGE_PATH = {
     SUCCESS: "/payment-success",
     FAIL: "/payment-fail",
   },
+  HISTORY: "/history",
 };
 
 export const NAVBAR = [
@@ -124,6 +126,7 @@ export const API = {
     ADD: `${CART_PATH}/add`,
     GET: `${CART_PATH}/get`,
     DELETE: `${CART_PATH}/delete`,
+    CHECKOUT: `${CART_PATH}/checkout/`,
   },
 };
 
@@ -140,6 +143,7 @@ export const RESPONSE_MESSAGES = {
   LOGOUT: {
     SUCCESS: "You are logged out!",
   },
+  CART: { CHECKOUT: { UNPAID: { WITHOUT_CARD: "Order successful!" } } },
 };
 
 export const CONTENT = {

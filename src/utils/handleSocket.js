@@ -35,5 +35,13 @@ export const handleSocketAction = {
       };
       handleOnOff(socket, handleCart);
     },
+    checkout: (socket, setState) => {
+      const handleCart = (data) => {
+        if (data.action === SOCKET.CART.CHECKOUT) {
+          setState(0);
+        }
+      };
+      handleOnOff(socket, handleCart);
+    },
   },
 };

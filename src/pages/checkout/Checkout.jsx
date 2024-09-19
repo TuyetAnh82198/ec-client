@@ -1,6 +1,7 @@
 import { Grid, Box, Button, TextField } from "@mui/material";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
 import SubBanner from "../../components/banner/SubBanner";
 import PageSize from "../../components/pageSize/PageSize";
@@ -30,8 +31,8 @@ const Checkout = () => {
     Address: "",
   });
 
-  const [selectedValue, setSelectedValue] = useState("PAYMENT METHOD");
   const [options, setOptions] = useState(["Cash", "Credit Card"]);
+  const [selectedValue, setSelectedValue] = useState(options[0]);
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
   };
@@ -71,12 +72,55 @@ const Checkout = () => {
 
   const handleInputs = (e, field) => {
     setInputs((prevInputs) => {
-      return { ...prevInputs, [field]: e.target.value };
+      return {
+        ...prevInputs,
+        [field === "Full Name" ? field.split(" ").join("") : field]:
+          e.target.value,
+      };
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const endpointCheckout =
+      API.CART.CHECKOUT + selectedValue.toLowerCase().split(" ").join("");
+    const url = process.env.REACT_APP_SERVER + endpointCheckout;
+
+    const headers = { "Content-Type": "application/json" };
+    const body = {
+      inputs,
+      token: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+    };
+
+    if (endpointCheckout.split("/")[3] === "creditcard") {
+      const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers,
+        body: JSON.stringify(body),
+      });
+      const data = await response.json();
+      const result = stripe.redirectToCheckout({
+        sessionId: data.sessionId,
+      });
+      if (result.error) {
+        console.log(result.error);
+      }
+    } else {
+      fetchCart({
+        endpoint: endpointCheckout,
+        method: "POST",
+        headers,
+        body,
+      })
+        .then((data) => {
+          handleResponse(data, null, navigate);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -106,12 +150,19 @@ const Checkout = () => {
                       marginBottom: "1rem",
                     }}
                     required
-                    value={inputs[field]}
+                    value={
+                      inputs[
+                        field === "Full Name"
+                          ? field.split(" ").join("")
+                          : field
+                      ]
+                    }
                     onChange={(e) => handleInputs(e, field)}
                   />
                 ))}
                 <Select
-                  label={selectedValue}
+                  label="PAYMENT METHOD"
+                  value={selectedValue}
                   values={options}
                   handleChange={handleChange}
                 />
