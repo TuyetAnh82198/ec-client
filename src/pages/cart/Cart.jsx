@@ -204,11 +204,9 @@ const Cart = () => {
                   <ArrowBack />
                   <span> Continue shopping</span>
                 </Box>
-                <Box
-                  onClick={() => handleNavigate("checkout")}
-                  sx={styledNavigateBtn}
-                >
+                <Box sx={styledNavigateBtn}>
                   <Button
+                    onClick={() => handleNavigate("checkout")}
                     disabled={isCheckout}
                     sx={{ textTransform: "none" }}
                     variant="outlined"
