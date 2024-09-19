@@ -127,6 +127,7 @@ export const API = {
     GET: `${CART_PATH}/get`,
     DELETE: `${CART_PATH}/delete`,
     CHECKOUT: `${CART_PATH}/checkout/`,
+    CHECK_PAYMENT: `${CART_PATH}/check-payment`,
   },
 };
 
