@@ -49,6 +49,7 @@ export const PAGE_PATH = {
     FAIL: "/payment-fail",
   },
   HISTORY: "/history",
+  HISTORY_DETAIL: "/history-detail/:id",
 };
 
 export const NAVBAR = [
@@ -128,6 +129,8 @@ export const API = {
     DELETE: `${CART_PATH}/delete`,
     CHECKOUT: `${CART_PATH}/checkout/`,
     CHECK_PAYMENT: `${CART_PATH}/check-payment`,
+    HISTORY: `${CART_PATH}/history`,
+    HISTORY_DETAIL: `${CART_PATH}/history-detail/`,
   },
 };
 

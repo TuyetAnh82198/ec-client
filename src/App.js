@@ -16,6 +16,7 @@ import Checkout from "./pages/checkout/Checkout";
 import PaymentSuccess from "./pages/payment/announcement/PaymentSuccess";
 import PaymentFail from "./pages/payment/announcement/PaymentFail";
 import History from "./pages/history/History";
+import HistoryDetail from "./pages/historyDetail/HistoryDetail";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: PAGE_PATH.PAYMENT.SUCCESS, element: <PaymentSuccess /> },
       { path: PAGE_PATH.PAYMENT.FAIL, element: <PaymentFail /> },
       { path: PAGE_PATH.HISTORY, element: <History /> },
+      { path: PAGE_PATH.HISTORY_DETAIL, element: <HistoryDetail /> },
     ],
   },
   { path: PAGE_PATH.REGISTER, element: <Register /> },

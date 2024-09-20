@@ -172,6 +172,8 @@ const LayoutHeader = () => {
         })
         .catch((err) => console.log(err));
     } else if (item === "HISTORY") {
+      navigate(PAGE_PATH.HISTORY);
+      setAnchorEl(null);
     }
   };
   const stylePromotion = {
