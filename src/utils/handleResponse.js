@@ -1,4 +1,9 @@
-import { RESPONSE_MESSAGES, PAGE_PATH, LOCAL_STORAGE } from "./constants";
+import {
+  RESPONSE_MESSAGES,
+  PAGE_PATH,
+  LOCAL_STORAGE,
+  PAGE_TITLE,
+} from "./constants";
 
 const handleResponse = (data, pageTitle, navigate) => {
   if (!data.msg) {
@@ -12,7 +17,7 @@ const handleResponse = (data, pageTitle, navigate) => {
   ) {
     if (data.msg === "Created!") {
       alert(`${pageTitle} Success!`);
-      if (pageTitle === "Register" && !data.noneFirefox) {
+      if (pageTitle === PAGE_TITLE.REGISTER && !data.noneFirefox) {
         navigate(PAGE_PATH.LOGIN);
       } else {
         const prevPath = localStorage.getItem("prevPath");
