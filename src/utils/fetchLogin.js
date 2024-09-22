@@ -21,7 +21,7 @@ const fetchLogin = () => {
     fetchObj = {
       ...fetchObj,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: token }),
+      body: JSON.stringify({ token }),
     };
   }
   return new Promise((resolve, reject) => {
