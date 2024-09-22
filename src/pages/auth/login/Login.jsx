@@ -16,7 +16,7 @@ const Login = () => {
           handleNavigate.toHomePage(navigate);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, []);
   return (
     <Background>
