@@ -57,6 +57,19 @@ const Shop = () => {
   };
 
   useEffect(() => {
+    setEndpoint(
+      API.PRODUCTS.GET.DETAIL +
+        picked.toLowerCase() +
+        "/" +
+        page +
+        "/" +
+        sort +
+        "/" +
+        search
+    );
+  }, [page]);
+
+  useEffect(() => {
     setIsLoading(true);
     setIsErr(false);
     fetchPd()
