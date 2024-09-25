@@ -11,6 +11,19 @@ export const SOCKET = {
     GET: "get",
     CHECKOUT: "checkout",
   },
+  CHAT: {
+    ROOM_ID: "roomId",
+    SENDER: { CLIENT: "client" },
+    INFOR: { SENDER: "sender", DATE_TIME: "dateTime", CONTENT: "content" },
+    SEND: {
+      CREATE_ROOM: "createRoom",
+      END_CHAT: "end chat",
+      EMIT: "frontend send messages",
+    },
+    RECEIVE: {
+      ON: "server send messages",
+    },
+  },
 };
 
 export const LOCAL_STORAGE = {
@@ -20,6 +33,8 @@ export const LOCAL_STORAGE = {
 export const COLOR = {
   MAIN_GREEN: "#469E02",
   DARK_GREEN: "#3D8A00",
+  PINK: "#cf4965",
+  LIGHT_GRAY: "#f8f9fa",
 };
 
 export const PAGE_SIZE = {
@@ -159,5 +174,8 @@ export const CONTENT = {
       CONTENT: "Thank you for your order!",
     },
     FAIL: { TITLE: "Oops! Your payment has been cancelled." },
+  },
+  CHAT: {
+    GREETING: "Hello, how can I help you today?",
   },
 };

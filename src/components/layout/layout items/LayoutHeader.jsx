@@ -89,7 +89,7 @@ const LayoutHeader = () => {
   useEffect(() => {
     fetchPd()
       .then((data) => {
-        setNumber(data.cart?.products.length);
+        setNumber(data.cart?.products?.length);
       })
       .catch((err) => {
         console.log(err);

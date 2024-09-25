@@ -1,7 +1,19 @@
 import { Grid, Slide, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { NavLink } from "react-router-dom";
+
 import { COLOR } from "../../utils/constants";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+
+export const StyledChatIcon = styled(QuestionAnswerIcon)({
+  fontSize: "3rem",
+  position: "fixed",
+  bottom: "2rem",
+  right: "2rem",
+  color: COLOR.PINK,
+  cursor: "pointer",
+  zIndex: "10",
+});
 
 export const StyledNavLink = styled(NavLink)({
   textDecoration: "none",
