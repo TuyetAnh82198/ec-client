@@ -40,14 +40,22 @@ import fetchCart from "../../../utils/fetchCart";
 
 const LayoutHeader = () => {
   const [isShow, setIsShow] = useState(true);
-  const [navbarItems, setNavbarItems] = useState([]);
-  const [dropdownItems, setDropdownItems] = useState([]);
-  const [number, setNumber] = useState(0);
-  const [endpoint, setEndpoint] = useState(API.CART.GET);
 
   const handleFilter = (item, property) => {
     return item.hasOwnProperty(property);
   };
+  const [navbarItems, setNavbarItems] = useState(
+    NAVBAR.filter(
+      (item) =>
+        handleFilter(item, "HOME") ||
+        handleFilter(item, "SHOP") ||
+        handleFilter(item, "REGISTER") ||
+        handleFilter(item, "LOGIN")
+    )
+  );
+  const [dropdownItems, setDropdownItems] = useState([]);
+  const [number, setNumber] = useState(0);
+  const [endpoint, setEndpoint] = useState(API.CART.GET);
 
   useEffect(() => {
     fetchLogin()
