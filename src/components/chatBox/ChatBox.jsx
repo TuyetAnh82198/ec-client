@@ -120,7 +120,7 @@ const ChatBox = ({ handleChat }) => {
     backgroundColor: COLOR.LIGHT_GRAY,
     borderRadius: "4px",
   };
-  const Body = () => {
+  const CardBody = () => {
     return (
       <>
         <hr />
@@ -223,7 +223,7 @@ const ChatBox = ({ handleChat }) => {
   return (
     <Card sx={styledCard} variant="outlined">
       <CardHeader component={Header} />
-      <CardContent component={Body} />
+      {CardBody()}
       {CardFooter()}
     </Card>
   );
