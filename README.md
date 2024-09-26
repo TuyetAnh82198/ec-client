@@ -18,6 +18,7 @@ Forgot password.
 CRUD.
 Sort.
 Search.
+Filter.
 Pagination.
 Automatically apply free shipping code to eligible orders.
 Updating stock.
