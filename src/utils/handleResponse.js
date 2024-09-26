@@ -43,7 +43,10 @@ const handleResponse = (data, pageTitle, navigate) => {
     alert(data.msg);
   }
   const noneFirefox = LOCAL_STORAGE.TOKEN;
-  if (data[noneFirefox] && pageTitle === "Login") {
+  if (
+    data[noneFirefox] &&
+    (pageTitle === PAGE_TITLE.LOGIN || pageTitle === PAGE_TITLE.REGISTER)
+  ) {
     localStorage.setItem(noneFirefox, data[noneFirefox]);
 
     const now = new Date();
