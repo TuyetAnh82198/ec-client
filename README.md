@@ -14,6 +14,7 @@ https://github.com/TuyetAnh82198/ec-server
 
 [Functional description]
 An email will be sent to user successfully registered.
+Forgot password.
 CRUD.
 Sort.
 Search.
